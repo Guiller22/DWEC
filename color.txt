@@ -1,0 +1,13 @@
+/* .color-primary-0 { color: #4C6315 }Main Primary color 
+.color-primary-1 { color: #020300 }
+.color-primary-2 { color: #1E2B00 }
+.color-primary-3 { color: #84A13F }
+.color-primary-4 { color: #D6F392 }*/
+
+/* As RGBa codes */
+
+/*.rgba-primary-0 { color: rgba( 76, 99, 21,1) }	 Main Primary color 
+.rgba-primary-1 { color: rgba(  2,  3,  0,1) }
+.rgba-primary-2 { color: rgba( 30, 43,  0,1) }
+.rgba-primary-3 { color: rgba(132,161, 63,1) }
+.rgba-primary-4 { color: rgba(214,243,146,1) }*/

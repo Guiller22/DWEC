@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    ul{
+        list-style-type: none;
+    }
+</style>
+<script>
+    function Aleatorio() {
+        var ul = document.querySelector('ul');
+        for (var i = ul.children.length; i >= 0; i--) {
+            ul.appendChild(ul.children[Math.random() * i | 0]);
+        }
+    }
+</script>
+
+<body>
+    <ul>
+        <li>Primer parrafo</li>
+        <li>Segundo parrafo</li>
+        <li>Tercer Parrafo</li>
+        <li>Cuarto Parrafo</li>
+        <li>Quinto Parrafo</li>
+        <li>Sexto Parrafo</li>
+        <li>Siete Parrafo</li>
+        <li>Ocho Parrafo</li>
+        <li>Nueve Parrafo</li>
+        <li>Diez Parrafo</li>
+    </ul>
+    <button onclick="Aleatorio()">Refrescar</button>
+</body>
+
+</html>

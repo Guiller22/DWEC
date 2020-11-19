@@ -1,0 +1,3 @@
+ejercicios
+al hacer click en un parrafo cambia el texto del anterior y el siguiente al valor que tenga el que pulsamos
+cambiar imagenes simulando gif

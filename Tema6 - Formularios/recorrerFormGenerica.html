@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="formu1">
+
+        Nombre :<input type="text" id="Nombre"><BR>
+        Apellidos :<input type="text" id="Apellidos">
+
+    </form>
+    <br>
+    <form id="formu2">
+
+        Localidad :<input type="text" id="Localidad"><BR>
+        Provincia :<input type="text" id="Provincia"><BR>
+        <button onclick="verDatos()">Ver datos de todos los formularios</button>
+    </form>
+    <script type="text/javascript">
+        function verDatos() {
+            var a = "";
+            for (var i = 0; i < document.forms.length; i++) {
+                for (j = 0; j < document.forms[i].elements[j]; j++) {
+                    c += "\n" + document.forms[i].elements[j].nombre+ ":" +document.forms[i].elements[j].apellidos;
+                    alert(c);
+                }
+
+            }
+        }
+    </script>
+</body>
+
+</html>

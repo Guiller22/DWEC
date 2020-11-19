@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Opciones formulario</h1>
+    <form>
+        <label for="nacionalidades">Nacionalidad1</label>
+        <select name="nacionalidades" id="nacionalidad">
+            <option value="es">Española</option>
+            <option value="br">Brazil</option>
+            <option value="po">Portugues</option>
+            <option value="fr">Frances</option>
+            <option value="as">Australiano</option>
+            </optgroup>
+        </select>
+        <br>
+        <button onclick="insertarDatos()">Insertar nacionalidad</button>
+        <button onclick="eliminarDatos()">Eliminar nacionalidad</button>
+        <br>
+        <br>
+        <input id="nacAniadir">
+
+
+    </form>
+    <script>
+        function insertarDatos() {
+            var c = "";
+            c += document.getElementById("nacAniadir");
+            var matches = c.match(/\b(\w)/g);
+            var dosLetras = matches.join('');
+            <option></option>
+        }
+    </script>
+</body>
+
+</html>

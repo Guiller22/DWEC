@@ -1,0 +1,21 @@
+<script>
+    //simular la concatanacion con parametros reset , funcion con un unico parametro rest para pasar varias cadena 
+    function sum(...suma) {
+  return suma.reduce((previous, current) => {
+    return previous + current;
+  });
+}
+
+console.log(sum(3, 4, 1));
+console.log(sum(2,4,1,2));
+
+    function reves(...reves) {
+    // ahora al reves
+    return reves.reverse((previous, current) => {
+    return current + previous;
+  });
+    }
+
+
+console.log(reves("gonzalo", "juan", "guille"));
+</script>

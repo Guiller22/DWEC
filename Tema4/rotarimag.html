@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+<script>
+    
+    var imagenes=new Array(
+        ['img/1.jpg'],
+        ['img/2.jpg'],
+        ['img/3.jpg'],
+        ['img/4.jpg']
+        //si quiero añadir una con link ['img/4.jpg','http://www.lawebdelprogramador.com/utilidades/']
+    );
+    var contador=0;
+ 
+    function rotarImagenes()
+    {
+        // cambiamos la imagen y la url
+        contador++
+        document.getElementById("imagen").src=imagenes[contador%imagenes.length][0];
+        // añadir link document.getElementById("link").href=imagenes[contador%imagenes.length][1];
+    }
+ 
+    /**
+     * Función que se ejecuta una vez cargada la página
+     */
+    onload=function()
+    {
+        // Cargamos una imagen aleatoria
+        rotarImagenes();
+ 
+        // Indicamos que cada 5 segundos cambie la imagen
+        setInterval(rotarImagenes,5000);
+    }
+</script>
+</head>
+ 
+<body>
+ 
+<img src="" id="imagen">
+<!-- si quiero añadir el link <a href="" id="link"></a> -->
+
+ 
+</body>
+</html>

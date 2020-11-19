@@ -1,0 +1,18 @@
+{
+    "workbench.colorTheme":"Default Dark+",
+    //CONFIGURACION PARA PHP
+    //
+    //PHP
+    //SEÑALA AL EJECUTABLE PHP
+    "php.validate.executablePath": "C:\\xampp\\php\\php.exe",
+    //
+    //INDICA SI LINTER SE EJECUTA AL GUARDAR O ESCRIBIR
+    "php.validate.run": "onType",
+    //
+    //PHP INTELLISENSE
+    //THE PATH TO A PHP 7+ EXECUTABLE
+    "explorer.confirmDelete": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "liveServer.settings.port": 5501,
+}

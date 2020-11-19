@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<head>
+
+</head>
+<style>
+    #prueba {
+        height: 200px;
+        width: 300px;
+        padding: 50px;
+        margin: 15px;
+        border: 5px solid green;
+        background-color: lightblue;
+        display: none;
+    }
+</style>
+
+<body>
+    
+    <h1>Propiedades offset: offsetHeight, offsetWidth, offsetLeft, offsetRight y offsetParent</h1>
+    <div id="prueba">
+        Hola!
+    </div>
+    <button onclick="verDiv()">Ver el div</button>
+    <hr>
+    <script type="text/javascript">
+        function verDiv() {
+            var x = document.getElementById("prueba");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        var prueba = document.getElementById("prueba");
+        document.write("<b>Elemento.offsetHeight altura de un elemento incluyendo el padding y los bordes:</b> " +
+            prueba.offsetHeight + "<br />");
+        document.write("<b>Elemento.offsetLeft numero de pixeles a la izquierda:</b> " +
+            prueba.offsetLeft + "<br />");
+        document.write("<b>Elemento.offsetTop numero de pixeles a la izquierda:</b> " +
+            prueba.offsetTop + "<br />");
+        document.write("<b>Elemento.offsetParent referencia a un objeto proximo:</b> " +
+            prueba.offsetParent + "<br />");
+        document.write("<b>Elemento.offsetWidth da el ancho incluyendo los bordes:</b> " +
+            prueba.offsetWidth + "<br />");
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>lenguaje_31 - Arrays: Recorrer un array</title>
+	</head>
+
+	<body>
+		<h1>lenguaje_31 - Arrays: Recorrer un array</h1>
+		<hr />
+		<h3>Ver consola</h3>
+
+		<script type="text/javascript">
+			function verValor(elemento,indice) {
+				console.log("Elemento[" + indice + "] = " + elemento);
+			}
+
+			var festivos = ["Santos","Navidad","Constitución"]; //3 elementos
+
+
+			console.log("BUCLE FOR")
+			for(i=0;i<=festivos.length-1;i++) {
+				console.log(festivos[i]);
+			}
+
+			console.log("MÉTODO FOREACH (función nominal)")
+			festivos.forEach(verValor);
+
+			console.log("MÉTODO FOREACH (función anónima)")
+			festivos.forEach(function (elemento,indice){
+				console.log("Elemento[" + indice + "] = " + elemento);
+			});
+		</script>
+	</body>
+</html>

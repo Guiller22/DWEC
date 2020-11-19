@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>lenguaje_09 - Relación entre hoisting y ámbito</title>
+	</head>
+	
+	<body>
+		<h1>lenguaje_09 - Relación entre hoisting y ámbito</h1>
+		<hr />
+		<h3>Ver consola</h3>
+
+		<script type="text/javascript">
+			function funcionEjemplo() {
+				//Las variables no declaradas son globales
+				variable1 = 5;
+				var variable2 = 7;
+			}
+
+			
+			funcionEjemplo();
+			
+			console.log(variable1); //5
+			//console.log(variable2); //ReferenceError: variable2 is not defined
+
+			//funcionEjemplo();
+		</script>
+	</body>
+</html>

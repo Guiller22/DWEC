@@ -1,0 +1,4 @@
+simular paso por ribera de castilla en cuanto a expediente academico  , simulando las convocatorias (junio y septiembre) segundo marzo y junio
+examen (numero aleatorio entre 1 y 10) si es > 5 aprobado año 2019/2020 examinar , se acaba cuando todos consigan el titulo.
+
+12- ordenar las fechas 

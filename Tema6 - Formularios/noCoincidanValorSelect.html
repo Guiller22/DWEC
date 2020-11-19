@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>formulario_12 - Ejercicio: No coindidan dos elecciones de un campo select</h1>
+    <br>
+
+    <label for="pais">Elige tu pais favorito con orden del 1 al 4</label>
+    <br>
+    <select name="pais" onchange="comprobar()">España
+        <option value="value1">1</option>
+        <option value="value2">2</option>
+        <option value="value3">3</option>
+        <option value="value4">4</option>
+    </select>
+    <select name="select" onchange="comprobar()">Italia
+        <option value="value1">1</option>
+        <option value="value2">2</option>
+        <option value="value3">3</option>
+        <option value="value4">4</option>
+    </select>
+    <select name="select" onchange="comprobar()">Alemania
+        <option value="value1">1</option>
+        <option value="value2">2</option>
+        <option value="value3">3</option>
+        <option value="value4">4</option>
+    </select>
+    <select name="select" onchange="comprobar()">Noruega
+        <option value="value1">1</option>
+        <option value="value2" selected>2</option>
+        <option value="value3">3</option>
+        <option value="value4">4</option>
+    </select>
+</body>
+<script>
+    function comprobar() {
+        var numSelecionados = [];
+        var selectedValue = document.getElementsByTagName("select");
+        alert(selectedValue);
+    }
+</script>
+
+</html>

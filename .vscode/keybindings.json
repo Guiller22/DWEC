@@ -1,0 +1,12 @@
+// Coloque sus atajos de teclado en este archivo para sobreescribir los valores predeterminados
+[{
+    "key": "f7",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Abrir en localhost (Firefox)"
+  },
+  {
+    "key": "f8",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Abrir en localhost (Chrome)"
+  }
+]

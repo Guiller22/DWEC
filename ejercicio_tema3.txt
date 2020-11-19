@@ -1,0 +1,3 @@
+Una vez tienes una fecha (ejercicios de parseado con fechas) 
+cambie el año de una fecha incrementandolo o decrementadolo dependiendo
+de si el dia que nace es par(incremente el año) o impar(baje uno)

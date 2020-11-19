@@ -1,0 +1,20 @@
+<script>
+    console.log(elem);
+    var elem = ['1' , '5' , '4' , '3' , '7' , '12' ,'1' ,'2','3','4'];
+    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
+
+    console.log(findDuplicates(elem)) // All duplicates
+
+    var numeros = [4,0,3,4,1,2,6,3,5,2,5,2,6,7,8,5,4,1];
+    var numero;
+    var nuevoArray = [];
+
+    while(numeros.length>0){
+        numero=numeros.pop();
+        if(nuevoArray.indexOf(numero)==-1){
+            nuevoArray.push(numero);
+        }
+    }
+    nuevoArray.sort();
+    document.write("<br />" + nuevoArray + "<br />")
+</script>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .colorazur{
+        color: blue;
+    }
+    .clasesize{
+        font-size: 28px;
+    }
+    .claseTexto{
+        text-decoration: underline;
+    }
+    .claseAriel{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
+<script>
+
+    function ponerClase(actual){
+        document.getElementById('cuadro').className += " " + actual.className;
+    }
+
+</script>
+<body>
+    <p class="colorazur" onclick="ponerClase(this)">Primer parrafo</p>
+    <p class="claseAriel" onclick="ponerClase(this)">Segundo parrafo</p>
+    <p class="clasesize" onclick="ponerClase(this)">Tercer Parrafo</p>
+    <p class="claseTexto" onclick="ponerClase(this)">Cuarto Parrafo</p>
+
+    <div id="cuadro">Texto que está dentro de un div de prueba</div>
+    <button onclick="document.getElementById('cuadro').className='';">Quitar clases</button>
+</body>
+</html>
