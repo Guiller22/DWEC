@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        border: 2px solid black;
+        border-collapse: collapse;
+        width: 100px;
+        text-align: center;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style>
+
+<style>
+</style>
+
+<body>
+    <h1>Eventos_07 - Ejercicio : Hacer click sobre una celda y nos diga la columna y la fila en la que se encuentra</h1>
+    <hr>
+
+    <table>
+        <tbody>
+            <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+            </tr>
+            <tr>
+                <td>D</td>
+                <td>E</td>
+                <td>F</td>
+            </tr>
+            <tr>
+                <td>G</td>
+                <td>H</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>J</td>
+                <td>K</td>
+                <td>L</td>
+            </tr>
+            <tr>
+                <td>M</td>
+                <td>N</td>
+                <td>O</td>
+            </tr>
+            <tr>
+                <td>P</td>
+                <td>Q</td>
+                <td>R</td>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+<script>
+    var datos = document.getElementsByTagName("td");
+
+    for (i = 0; i < datos.length; i++) {
+        datos[i].addEventListener("click", function (e) {
+                    var columna = 0,
+                        fila = 0;
+
+                    var nodoTbody = this.parentNode.parentNode;
+                    for (fil=0;fil<nodoTbody.children.length;fil++){
+                        for(col=0;col<nodoTbody.children[fil].children.length;col++){
+                            if(this===nodoTbody.children[fil].children[col]){
+                                fila = fil+1;
+                                columna = col +1;
+                            }
+                        }
+                    }
+                    alert("FILA: " + fila + " <---> Columna: " +columna);
+        }
+        )}
+</script>
+
+</html>
