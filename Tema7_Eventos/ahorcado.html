@@ -7,21 +7,23 @@
     <title>Document</title>
 </head>
 <style>
-    
+.jugador2{
+    visibility: hidden;
+}
 </style>
 
 <body>
     <h1>Juego del ahorcado</h2>
         <hr>
-        <div class="jugador1">
+        <div class="jugador1" id="jug1">
             <h2>Jugador 1 introduce una palabra</h2>
         </div>
-        <p>Introduce una palabra</p> <input>
+        <p>Introduce una palabra</p> <input class="palabra" type="password" id="palabra">
         <hr>
-        <div class="jugador2">
+        <button onclick="iniciar()">Empezar juego</button>
+        <div class="jugador2" id="jug2">
             <h2>Jugador 2 introduce una palabra</h2>
-
-            <select name="letras">
+            <select name="letras" id="selecionarLetra">
                 <option value="A">A</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
@@ -49,15 +51,50 @@
                 <option value="Y">Y</option>
                 <option value="Z">Z</option>
             </select>
-
         </div>
-
-
 </body>
 <script>
     var letraDicha = document.getElementsByTagName("letras");
-    var opcionSelecionada = this.options[select.selectedIndex];
-    console.log(selectedOption.value + ': ' + selectedOption.text);
+    palabra = document.getElementById("palabra").value;
+    var opcionSelecionada = document.getElementById("selecionarLetra").value;
+    var oculta = [];
+    var contadorIntentos = 6;
+    var hueco = document.getElementById("palabra");
+    function iniciar() {
+        document.getElementById('jug2').visibility='visible';
+        pintarGuiones(palabra.length);
+        contadorIntentos = 6;
+        document.getElementById("intentos").innerHTML = contadorIntentos;
+    }
+    
+
+    function pintarGuiones(num) {
+        for (var i = 0; i < num; i++) {
+            oculta[i] = "_";
+        }
+        hueco.innerHTML = oculta.join("");
+    }
+
+    function intento(letra) {
+        document.getElementById(letra).disabled = true;
+        if (palabra.indexOf(letra) != -1) {
+            for (var i = 0; i < palabra.length; i++) {
+                if (palabra[i] == letra) oculta[i] = letra;
+            }
+            hueco.innerHTML = oculta.join("");
+            document.getElementById("acierto").innerHTML = "Bien!";
+            document.getElementById("acierto").className += "acierto verde";
+        } else {
+            cont--;
+            document.getElementById("intentos").innerHTML = cont;
+            document.getElementById("acierto").innerHTML = "Fallo!";
+            document.getElementById("acierto").className += "acierto rojo";
+            document.getElementById("image" + cont).className += "fade-in";
+        }
+        compruebaFin();
+    }
+
+    
 </script>
 
 </html>

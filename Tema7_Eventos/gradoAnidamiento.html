@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        background-color: red;
+        width: 400px;
+        height: 400px;
+    }
+
+    table,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    p {
+        border-collapse: separate;
+    }
+</style>
+
+<body>
+    <h1>Ejercicio 22: Obtener el grado de anidamiento</h1>
+    <hr>
+    <span>Grado de anidamiento: </span><span id="grado"></span>
+    <div>
+
+        <br>
+        <table>
+            <tbody>
+                <tr>
+                    <td>A</td>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>D</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Parrafo de prueba</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+<script>
+    var elementos = document.getElementsByTagName("*");
+    var prof = 0;
+
+    for (i = 0; i < elementos.length; i++) {
+        if (elementos[i].tagName != "body") {
+            elementos[i].addEventListener("click", function (e) {
+                prof++;
+            });
+        } else {
+
+        }
+        document.getElementById("grado").innerText = prof;
+
+        prof = 0;
+        e.stopPropagation();
+    }
+</script>
+
+</html>
