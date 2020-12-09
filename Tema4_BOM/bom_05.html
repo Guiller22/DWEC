@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>bom_05 - Objeto Window: temporizadores (ejemplo de reloj)</title>
+	</head>
+
+	<script type="text/javascript">
+	
+		var intervalo;
+
+		function escribirHora() {
+			var d = new Date();
+    		var t = d.toLocaleTimeString();
+			
+			//Versión sin DOM ni eventos
+			//document.write(t + "<br />");
+
+			//Versión con DOM y eventos (próximos temas)
+			document.getElementById("parrafo").innerHTML = t;
+		}
+
+		function iniciar() {
+			intervalo = setInterval(function (){
+				var d = new Date();
+    			var t = d.toLocaleTimeString();
+
+				document.getElementById("parrafo").innerHTML = t;
+			},1000);
+
+			//intervalo = setInterval(escribirHora,1000); //Con función nominal
+		}
+
+		function parar() {
+			clearInterval(intervalo);
+		}
+
+	</script>		
+
+	<body>
+		<h1>bom_05 - Objeto Window: temporizadores (ejemplo de reloj)</h1>
+		<hr />
+		<button onclick="iniciar();">Iniciar Reloj</button>
+		<button onclick="parar();">Parar</button>
+		<hr />
+		<p id="parrafo"></p>
+	</body>
+</html>
