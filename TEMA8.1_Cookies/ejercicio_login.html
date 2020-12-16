@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="existeCookie()">
+    Usuario
+    <input id="usuario" type="text">
+    <br>
+    Contraseña
+    <input id="contrasenya" type="text">
+    <br>
+    <input id="recordar" type="checkbox">Recordar
+    <input id="realizar" type="submit" onclick="loggear()">
+
+    <script>
+        function leerCookie(clave) {
+            var resultado = "";
+            var busqueda = clave + "=";
+
+            var listCookies = document.cookie.split(';');
+            var par = "";
+
+            for (var i = 0; i < listCookies.length; i++) {
+                par = listCookies[i]; //Cada elemento del array de cookies: nombre de la cookie y carácter =
+
+                //Se quitan los espacios en blanco 
+                while (par.charAt(0) == ' ') {
+                    par = par.substring(1);
+                }
+
+                //Se compara los que buscamos con el elemento del array. Si devuelve como índice 0 se ha encontrado
+                if (par.indexOf(busqueda) == 0) {
+                    resultado = par.substring(busqueda.length, par.length);
+                }
+            }
+            return resultado;
+        }
+        function existeCookie() {
+				var valorCookie = leerCookie("usuario");
+				var d = new Date();
+				var valorNuevo;
+				d.setTime(d.getTime() + (365*24*60*60*1000));
+				var caduca = "expires="+ d.toUTCString();
+
+				if(valorCookie!="")	{
+					if(document.getElementById("recordar").checked){
+                        document.cookie = "usuario=" + usuario + ";" + caduca;    
+                    }
+				} else {
+					valorCookie = "";
+				}
+
+            }
+            
+            function loggear(){
+                var usuario = document.getElementById("usuario");
+                var contrasenya = document.getElementById("contrasenya");
+                if ((usuario=="pepe" && contrasenya=="1234") || usuario=="pepe" && contrasenya=="1234"){
+                    alert("El usuario es correcto")
+                    document.cookie = "usuario=" + usuario + ";" + caduca;
+                }else{
+                    alert("El usuario es incorrecto")
+                }
+            }
+    </script>
+</body>
+
+</html>

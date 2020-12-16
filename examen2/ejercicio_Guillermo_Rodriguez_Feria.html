@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen-Guillermo</title>
+    <style>
+        .no {
+            border: 2px solid black;
+        }
+
+        .si {
+            border: 2px dotted red;
+        }
+
+        div {
+            padding: 1cm;
+            margin: 0.5cm;
+            width: 25%;
+        }
+
+        #obligatorio {
+            font-size: 20px;
+            color: red;
+        }
+
+        td {
+            width: 20px;
+            height: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Examen 2</h1>
+    <hr>
+    <span id="obligatorio" draggable="true" ondragstart=fase1(evento) ondragover="fase2(evento)"
+        ondragend="fase3(evento)">OBLIGATORIO</span>
+
+    <div id="cuadrodni" class="no" draggable="true" ondragstart=fase1(evento)>
+        DNI<br>
+        <input type="text" id="dni">
+    </div>
+    <div id="cuadronombre" class="no" draggable="true" ondragstart=fase1(evento) ondragover="fase2(evento)"
+        ondragend="fase3(evento)">
+        Nombre<br>
+        <input type="text" id="nombre"></div>
+    <div id="cuadrotelefono" class="no" draggable="true" ondragstart=fase1(evento) ondragover="fase2(evento)"
+        ondragend="fase3(evento)">
+        Telefono<br>
+        <input type="text" id="telefono"></div>
+    <p id="datos"></p>
+    <button onclick="enviar()">Almacenar</button>
+
+    <br>
+
+    <table>
+        <tbody id="tabla"></tbody>
+    </table>
+
+    <script type="text/javascript">
+        var contenedores = document.getElementsByTagName("div");
+
+        function fase1(pEvento) {
+            pEvento.dataTransfer.setData("", pEvento.target.id);
+        }
+
+        function fase2(pEvento) {
+            pEvento.preventDefault();
+        }
+
+        function fase3(pEvento) {
+            if (pEvento.dataTransfer.getData("")=="obligatorio") {
+                    var copia = document.getElementById("obligatorio").cloneNode(true);
+                    document.getElementById("contenedores").innerHTML = copia;
+                    event.target(copia);
+            }
+            }
+
+
+            function enviar() {
+                var dni = document.getElementById("dni").value;
+                var nombre = document.getElementById("nombre").value;
+                var telefono = document.getElementById("telefono").value;
+				/*var datos=document.getElementById("input").value;*/
+                var tabla = document.getElementById("tabla");
+                var fila, td;
+                for (i = 0; i < datos.length; i++) {
+                    fila = document.createElement("tr");
+                    td = document.createElement("td");
+                    tabla.appendChild(fila);
+                    for(j=0;j<3;i++){
+                        fila = document.getElementById("nombre").value;
+                    }
+
+                }
+            }
+    </script>
+
+</body>
+
+</html>
