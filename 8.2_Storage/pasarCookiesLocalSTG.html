@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Ejercicio: Pasar cookies a local storage y viceversa</h1>
+    <hr>
+    <button onclick="obtenerCookies()">Ver cookies</button>
+    <button onclick="obtenerStorage()">Ver localStorage</button>
+    <button onclick="pasarLocalStorageCookies()">Pasar local a cookies</button>
+    <button onclick="pasarCookiesLocalStorage()">Pasar cookies a local</button>
+    </table>
+    <script>
+        function obtenerCookies() {
+            var resultado = "";
+            var busqueda = clave + "=";
+
+            var listCookies = document.cookie.split(';');
+            var par = "";
+
+            for (var i = 0; i < listCookies.length; i++) {
+                par = listCookies[i]; //Cada elemento del array de cookies: nombre de la cookie y carácter =
+
+                //Se quitan los espacios en blanco 
+                while (par.charAt(0) == ' ') {
+                    par = par.substring(1);
+                }
+
+                //Se compara los que buscamos con el elemento del array. Si devuelve como índice 0 se ha encontrado
+                if (par.indexOf(busqueda) == 0) {
+                    resultado = par.substring(busqueda.length, par.length);
+                }
+            }
+            return resultado;
+        }
+
+        function pasarCookiesLocalStorage() {
+
+        }
+
+        function pasarLocalStorageCookies() {
+
+        }
+
+        function obtenerStorage() {
+            var table = document.createElement('table');
+            var thead = document.createElement('thead');
+            var tbody = document.createElement('tbody');
+            var c = "";
+            "<h2>Recorrido con la propiedad key y un índice</h2>";
+            //Se almacenan alfabéticamente
+            for (i = 0; i < localStorage.length; i++) {
+                c += localStorage.key(i) + " --> " + localStorage.getItem(localStorage.key(i));
+                
+            }
+            var theadTr = document.createElement('tr');
+            for (var i = 0; i < c.length; i++) {
+                var theadTh = document.createElement('th');
+                theadTh.innerHTML = c[i];
+                theadTr.appendChild(theadTh);
+            }
+            thead.appendChild(theadTr);
+            table.appendChild(thead);
+
+            for (j = 0; j < objects.length; j++) {
+                var tbodyTr = document.createElement('tr');
+                for (k = 0; k < labels.length; k++) {
+                    var tbodyTd = document.createElement('td');
+                    tbodyTd.innerHTML = objects[j][labels[k].toLowerCase()];
+                    tbodyTr.appendChild(tbodyTd);
+                }
+                tbody.appendChild(tbodyTr);
+            }
+            table.appendChild(tbody);
+
+            container.appendChild(table);
+        }
+    </script>
+</body>
+
+</html>

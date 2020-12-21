@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form{
+        margin: 0;
+        padding: 10px;
+    }
+    button{
+        padding: 5px;
+        margin: 2px;
+    }
+</style>
+<body>
+    <form>
+        <input id="clave"><br>
+        <input id="valor"><br>
+        <button type="submit" onclick="ponerClaveValor()">Guardar</button>
+        <button type="submit" onclick="obtenerValor()">ver valor</button>
+        <button type="submit" onclick="modificarPropiedad()">Modificar valores</button>
+        <button type="reset">Eliminar</button>
+    </form>
+    <script>
+        function ponerClaveValor() {
+            var c = document.getElementById("clave").value;
+            var v = document.getElementById("valor").value;
+            window.localStorage.setItem(c, v);
+            localStorage.setItem(c, v);
+        }
+
+        function obtenerValor() {
+            var c = document.getElementById("clave").value;
+            alert(window.localStorage.getItem(c));
+        }
+
+        function modificarPropiedad() {
+            window.localStorage.ciudad = "Valladolid";
+            localStorage["color"] = "verde";
+            alert(localStorage.ciudad + " - " + localStorage["color"]);
+        }
+    </script>
+</body>
+
+</html>

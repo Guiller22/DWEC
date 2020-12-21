@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejemplo version B</h1>
+    <br>
+    <input id="clave">
+    <input id="valor">
+
+    <br>
+    <button onclick="ponerValor()">Poner valor</button>
+
+
+    <script>
+
+        window.addEventListener("storage",function(evento){
+            alert('Se ha modificado el almacenamiento');
+        })
+
+        function ponerValor(){
+            var c = document.getElementById("clave").value;
+            var v = document.getElementById("valor").value;
+            localStorage.setItem(c,v);
+
+        }
+    </script>
+</body>
+</html>
