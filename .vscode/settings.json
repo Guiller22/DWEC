@@ -14,5 +14,5 @@
     "explorer.confirmDelete": false,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "liveServer.settings.port": 5501,
+    "liveServer.settings.port": 5502,
 }
