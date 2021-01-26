@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="css/the-big-picture.css" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
         <div class="container">
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <a class="navbar-brand" href="index.html">PlanetWeb</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,10 +25,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="planetas.html">Planetas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                        <a class="nav-link" href="asteroides.html">Asteroides</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
@@ -42,8 +40,8 @@
 
     <div class="formulario">
         <form action="#">
-
-            <label for="nombre">Nombre</label>
+            <h1>Registro para recibir información sobre nuestra página</h1>
+            <label id="nombre" for="nombre">Nombre</label>
             <input type="text" id="fname" name="nombre" placeholder="Nombre..">
 
             <label for="apellido">Apellido</label>
@@ -61,10 +59,15 @@
             <label for="correo">E-mail</label>
             <input type="text" id="correo" name="correo" placeholder="Email..">
 
-            <input type="submit" value="Registrar">
+            <input type="submit" onclick="notificacion()" value="Registrar">
 
         </form>
     </div>
+    <script>
+        function notificacion() {
+            alert("Hola\n" + document.getElementById("fname").value);
+        }
+    </script>
 </body>
 
 </html>
