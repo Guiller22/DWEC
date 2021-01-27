@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="recursos/jquery-3.5.1.js"></script>
+</head>
+<style>
+    #objeto {
+        position: relative;
+        border: 1px solid black;
+        width: 120px;
+        height: 30px;
+        text-align: center;
+        background-color: green;
+        margin: 20px 0px;
+    }
+    #objeto2{
+        position: relative;
+        border: 1px solid black;
+        width: 120px;
+        height: 30px;
+        text-align: center;
+        background-color: rgb(83, 83, 170);
+    }
+</style>
+
+<body>
+    <button id="iniciar">Iniciar animacion</button>
+    <div id="objeto">Hola</div>
+    <div id="objeto2">Adios</div>
+</body>
+<script>
+    $(function () {
+        $("#iniciar").click(function () {
+            $("#objeto").animate({
+                rigth: 220,
+                width: "200px",
+                opacity: 0.20
+            }, 1000);
+            $("#objeto").animate({
+                fontSize: "24px"
+            }, 1000);
+            $("#objeto2").animate({
+                left: 220,
+                width: "200px",
+                opacity: 1
+            }, 1000);
+            $("#objeto2").animate({
+                fontSize: "24px"
+            }, 1000);
+        });
+    });
+</script>
+</body>
+
+</html>
