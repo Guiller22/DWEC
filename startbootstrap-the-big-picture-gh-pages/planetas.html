@@ -11,8 +11,9 @@
   <title>Planetas</title>
 
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <link href="css/the-big-picture.css" rel="stylesheet">
+	<link href="css/the-big-picture.css" rel="stylesheet">
+	<link rel="stylesheet" href="indexedDB_18/css/estilos.css">
+	<script type="text/javascript" src="indexedDB_18/js/libros.js"></script>
 
 </head>
 
@@ -44,20 +45,42 @@
     </div>
   </nav>
 
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <h1 class="mt-5">Espacio</h1>
-          <p>La Tierra.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+	<section>
 
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<h1 class="mt-5">Planetas</h1>
+					<a href="#" id="botonCargar" class="button1">Cargar</a>
+					<a href="#" id="botonInsertar" class="button1">Añadir</a>
+					<a href="#" id="botonModificar" class="button1">Modificar</a>
+					<a href="#" id="botonEliminar" class="button1">Eliminar</a>
+				</div>
+			</div>
+			<div id="cuadroIzquierda">
+				<select id="listaPlanetas" size="12"></select>
+			</div>
 
+			<div id="cuadroDerecha">
+				<div>
+					<span>Nombre</span>
+					<input type="text" id="nombre">
+				</div>
+				<div>
+					<span>Descubridor</span>
+					<input type="text" id="desc">
+				</div>
+				<div>
+					<span>AÑO</span>
+					<input type="text" id="anyo">
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+	</section>
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

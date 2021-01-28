@@ -1,26 +1,4 @@
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>indexedDB_07 - Crear índices</title>
-		<link rel="icon" type="image/x-icon" href="recursos/favicon.ico">
-	</head>
-	<body>
-		<h1>indexedDB_07 - Crear índices</h1>
-		<h2>La base de datos no debe estar creada previamente</h2>
-		<h2>Ver consola</h2>
-		<hr />
-
-		<button onclick="crearIndicesBD();">Crear índices en los almacenes</button>
-
-		<br /><br />
-
-		<textarea id="info" cols="120" rows="20"></textarea>
-
-		<script type="text/javascript">
-
-			var peticion,bd,almacenPersonas,almacenCoches,almacenCiudades;
+var peticion,bd,almacenPersonas,almacenCoches,almacenCiudades;
 
 			function mensaje(texto) {
 				document.getElementById("info").value += "\n\n" + texto;
@@ -93,8 +71,5 @@
 				} else {
 					console.log("IndexedDB no está soportado");
 				}
-			}
-
-		</script>
-	</body>
-</html>
+            }
+            window.onload = crearIndicesBD;
