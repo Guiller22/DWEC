@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body{
+        background: url('estrella.jpg') no-repeat center center fixed;
+    }
+    h1{
+        color:white;
+    }
+    p{
+        color: white;
+    }
+</style>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>The Big Picture - Start Bootstrap Template</title>
+
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  
+    
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">PlanetWeb</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="subscripcion.html">Subscribete para recibir novedades
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="planetas.html">Planetas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="asteroides.html">Asteroides</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h1 class="mt-5">Espacio</h1>
+          <p>Estrella.</p>
+          <div class="formulario">
+            <form onsubmit="guardarValores()">
+                <h1>Registro para apadrinar tu estrella</h1>
+                <label id="nombre" for="nombre">Nombre</label>
+                <input class="formRegist" type="text" id="fname" name="nombre" placeholder="Nombre..">
+    
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" placeholder="Apellido..">
+    
+                <label for="pais">Pais</label>
+                <select id="pais" name="pais">
+                    <option value="España">España</option>
+                    <option value="Francia">Francia</option>
+                    <option value="Alemania">Alemania</option>
+                    <option value="Rusia">Rusia</option>
+                    <option value="Australia">Australia</option>
+                </select>
+    
+                <label for="correo">E-mail</label>
+                <input type="text" id="correo" name="correo" placeholder="Email..">
+    
+                <input type="submit" onclick="notificacion()" value="Registrar">
+    
+            </form>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="scripts/crearAlmacenes.js"></script>
+
+</body>
+
+</html>

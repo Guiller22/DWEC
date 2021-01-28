@@ -11,6 +11,9 @@ h1{
 p{
   color: white;
 }
+a.button1{
+  text-decoration: none;
+}
 .button1{
   display:inline;
   padding:0.35em 1.2em;
@@ -91,6 +94,49 @@ input[type=submit]:hover{
 }
 .formulario h1{
   color: rgb(255, 233, 233);
+}
+#cuadroIzquierda {
+  border: 12px solid gray;
+  width: 30%;
+  float: left;
+  margin:20px;
+  padding: 30px 30px;
+  background-color: white;
+}
+
+#cuadroDerecha {
+  border: 12px solid gray;
+  width: 30%;
+  float: right;
+  margin:20px;
+  padding: 30px 30px;
+  background-color: white;
+}
+
+#cuadroSuperior {
+  border: 5px solid gray;
+  width: 66%;
+  margin:20px;
+  padding: 30px 30px;
+  background-color: white;
+}
+
+
+
+option {
+  background-color:tan;
+  padding: 10px;
+  font-size: 14px;
+}
+
+span {
+  color:rgb(61, 67, 71);
+  font-family: verdana;
+  font-size: 20px;
+}
+
+#cuadroDerecha div {
+  padding: 10px 10px;
 }
 
 

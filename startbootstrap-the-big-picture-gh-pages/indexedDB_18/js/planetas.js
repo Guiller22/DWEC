@@ -10,7 +10,7 @@ function codigo() {
 				bd = evento.target.result;
 							
 				transaccion = bd.transaction(bd.objectStoreNames, "readwrite");
-				almacen = transaccion.objectStore("planetas");
+				almacen = transaccion.objectStore("Planetas");
 
 				document.getElementById("listaPlanetas").innerHTML = "";
 
@@ -26,7 +26,7 @@ function codigo() {
 						console.log("FIN");
 					}
 				}
-
+				document.getElementById("id").value = "";
 				document.getElementById("nombre").value = "";
 				document.getElementById("desc").value = "";
 				document.getElementById("anyo").value = "";
@@ -76,27 +76,35 @@ function codigo() {
 		}
 	}
 
-	/***************************************************************
-	 * INSERTAR ****************************************************
-	 **************************************************************/
+	
 	document.getElementById("botonInsertar").onclick = function () {
 		var transaccionInsertar = bd.transaction(bd.objectStoreNames,"readwrite");
-		var almacenInsertar = transaccionInsertar.objectStore("libros");
-		var nuevoLibro = {};
+		var almacenInsertar = transaccionInsertar.objectStore("Planetas");
+		var nuevoPlaneta = {};
 
-		nuevoLibro.id = parseInt(document.getElementById("id").value);
-		nuevoLibro.nombre = document.getElementById("anyo").value;
-		nuevoLibro.autor = document.getElementById("autor").value;
-		nuevoLibro.editorial = document.getElementById("editorial").value;
-		nuevoLibro.paginas = parseInt(document.getElementById("paginas").value);
-		nuevoLibro.precio = parseInt(document.getElementById("precio").value);
+		nuevoPlaneta.id = parseInt(document.getElementById("id").value);
+		nuevoPlaneta.anyo = document.getElementById("anyo").value;
+		nuevoPlaneta.nombre = document.getElementById("nombre").value;
+		nuevoPlaneta.desc = document.getElementById("desc").value;
+		
 
-		almacenInsertar.add(nuevoLibro);
-		refrescarListaLibros();
+		almacenInsertar.add(nuevoPlaneta);
+		refrescarLista();
 	}
 
 
+	document.getElementById("botonModificar").onclick = function () {
+		var transaccionModificar = bd.transaction(bd.objectStoreNames,"readwrite");
+		var almacenModificar = transaccionModificar.objectStore("Planetas");
+		var nuevoPlaneta = {};
 
+		nuevoPlaneta.id = parseInt(document.getElementById("id").value);
+		nuevoPlaneta.anyo = document.getElementById("anyo").value;
+		nuevoPlaneta.nombre = document.getElementById("nombre").value;
+		nuevoPlaneta.desc = document.getElementById("desc").value;
+		almacenModificar.put(nuevoPlaneta);
+		refrescarLista();
+	}
 
 	/***************************************************************
 	 * ELIMINAR ****************************************************
