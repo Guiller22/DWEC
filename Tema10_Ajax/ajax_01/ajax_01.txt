@@ -1,1 +1,1 @@
-Esto es el texto del ejemplo ajax_01 hola pruebs
+Esto es el texto del ejemplo ajax_01
