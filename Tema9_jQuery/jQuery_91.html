@@ -36,8 +36,7 @@
 
 		<script>
 
-			
-			 //Comentar y comprobar que da error al cargar si la librería de jquery se carga después de la de prototype
+			jQuery.noConflict(); //Comentar y comprobar que da error al cargar si la librería de jquery se carga después de la de prototype
 			
 			function probar() {
 				$("c1").addClassName("fondoAmarillo"); //Prototype

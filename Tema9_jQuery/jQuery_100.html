@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery_100 - Ejercicio: Formar la palabra con las celdas adyacentes</title>
+		<link rel="icon" type="image/x-icon" href="recursos/favicon.ico">
+		<script src="recursos/jquery-3.3.1.js"></script>
+	</head>
+	<body>
+		<h1>jQuery_100 - Ejercicio: Formar la palabra con las celdas adyacentes</h1>
+		<hr />
+
+
+		<table id="tabla1" border="2">
+			<tr>
+				<td>1</td>
+				<td>A</td>
+				<td>B</td>
+				<td>C</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>D</td>
+				<td>E</td>
+				<td>F</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>G</td>
+				<td>H</td>
+				<td>I</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>J</td>
+				<td>K</td>
+				<td>L</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>M</td>
+				<td>N</td>
+				<td>O</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>P</td>
+				<td>Q</td>
+				<td>R</td>
+			</tr>
+		</table>
+
+		<br />
+		<p id="titulo" style="font-size: 1cm;"></p>
+		<br />
+
+		<script>
+			
+			$(function (){
+				var numFilas,numColumnas;
+				var fila,columna;
+
+				numFilas = $("table tbody").children().length;
+				numColumnas = $("table tbody").children().eq(0).children().length;
+				console.log("FILAS:" + numFilas);
+				console.log("COLUMNAS:" + numColumnas);
+
+
+				$("tr").click(function(i) {
+					fila = $(this).index();
+					var c = "";
+					console.log("  Fila:" + fila);
+					console.log("  Columna:" + columna);
+										
+					//PRIMERA FILA
+					if(fila>0) {
+						if (columna>0) {c += $("table tbody").children().eq(fila-1).children().eq(columna-1).text();}
+						c += $("table tbody").children().eq(fila-1).children().eq(columna).text();
+						if (columna<numColumnas) {c += $("table tbody").children().eq(fila-1).children().eq(columna+1).text();}
+					}
+					
+					//SEGUNDA FILA
+					if (columna>0) {c += $("table tbody").children().eq(fila).children().eq(columna-1).text();}
+					c += $("table tbody").children().eq(fila).children().eq(columna).text();
+					if (columna<numColumnas) {c += $("table tbody").children().eq(fila).children().eq(columna+1).text();}
+					
+					//TERCERA FILA
+					if(fila<numFilas) {
+						if (columna>0) {c += $("table tbody").children().eq(fila+1).children().eq(columna-1).text();}
+						c += $("table tbody").children().eq(fila+1).children().eq(columna).text();
+						if (columna<numColumnas) {c += $("table tbody").children().eq(fila+1).children().eq(columna+1).text();}
+					}
+					
+					document.getElementById("titulo").innerText = c.toUpperCase();
+				});
+
+				$("tr > td").click(function(i) {
+					columna = $(this).index();
+				});
+			});
+
+		</script>
+	</body>
+</html>
