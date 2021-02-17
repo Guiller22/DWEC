@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>EXAMEN 3 PARTE C</title>
+</head>
+<style>
+    .botonInsertar {
+        visibility: hidden;
+    }
+
+    .botonVisible {
+        visibility: visible;
+    }
+</style>
+
+<body>
+    <h1>EXAMEN 3 PARTE C</h1>
+    <hr />
+
+    <p id="datosSocio"></p>
+    <br>
+    <button onclick="insertar()">CONFIRMAR E INSERTAR EN BD</button>
+    <p id="accionRealizada"></p>
+    <BR>
+    <BR>
+    <button onclick="verDatos()">VER SOCIOS DE LA BASE DE DATOS</button>
+    <br>
+    <br>
+    <button onclick="habilitar()">HABILITAR JQUERY</button>
+    <br>
+    <br>
+    <br>
+    <table id="tabla1" border="1">
+        <tbody>
+            <tr>
+				<td>Prueba</td>
+				<td>A</td>
+				<td>B</td>
+				<td>C</td>
+			</tr>
+			<tr>
+				<td>Prueba</td>
+				<td>D</td>
+				<td>E</td>
+				<td>F</td>
+			</tr>
+    </table>
+
+    <script type="text/javascript">
+        window.addEventListener("storage", function (event) {
+            var socioJSON = localStorage.getItem("nuevosocio");
+            var socio = JSON.parse(socioJSON);
+
+            var c = "";
+            c += "<br />id: " + socio.id;
+            c += "<br />NOMBRE: " + socio.nombre;
+            c += "<br />DIRECCION: " + socio.direccion;
+            c += "<br />SEXO: " + socio.sexo;
+            c += "<br />PREMIUM :";
+            if (socio.premium) {
+                c += "Sí";
+            } else {
+                c += "No";
+            }
+
+            document.getElementById("datosSocio").innerHTML = c;
+            /*if($("button").hasClass("botonInsertar")) {
+					$("button").addClass("botonVisible");
+
+                    
+				}*/
+        });
+
+        function insertar() {
+            var socioJSON = localStorage.getItem("nuevosocio");
+            var socio = JSON.parse(socioJSON);
+            if (window.indexedDB) {
+                request = window.indexedDB.open("Examen");
+
+                request.onsuccess = function (evento) {
+                    console.log("Success");
+
+                    bd = evento.target.result;
+                    transaccion = bd.transaction(bd.objectStoreNames, "readwrite");
+
+                    almacenSocios = transaccion.objectStore("Socios");
+                    //almacenSocios.add({id:"400",nombre:"pepe",direccion:"calle",sexo:"hombre",premium:"SI"});
+
+                    almacenSocios.put(socio);
+
+                    rango = IDBKeyRange.bound(0, 400);
+                    clavesPeticion = almacenSocios.getAllKeys(rango);
+                    if ((socio.id) !== clavesPeticion) {
+                        document.getElementById("accionRealizada").innerHTML = "INSERTADO";
+                    } else {
+                        document.getElementById("accionRealizada").innerHTML = "MODIFICADO";
+                    }
+                };
+
+
+                request.onerror = function (evento) {
+                    alert("No se ha creado la base de datos: " + evento.target.errorCode);
+                };
+
+
+                request.onupgradeneeded = function (evento) {
+                    console.log("Upgradeneeded");
+                };
+            } else {
+                console.log("IndexedDB no está soportado");
+            };
+        }
+
+        function verDatos() {
+            if (window.indexedDB) {
+                peticion = window.indexedDB.open("Examen");
+
+                peticion.onsuccess = function (evento) {
+                    bd = evento.target.result;
+
+                    transaccion = bd.transaction(bd.objectStoreNames, "readwrite");
+                    almacen = transaccion.objectStore("Socios");
+
+                    document.getElementById("lista").innerHTML = "";
+
+                    var peticionCursor = almacen.openCursor();
+                    peticionCursor.onsuccess = function (evento) {
+                        var cursor = peticionCursor.result;
+                        document.getElementById("id").value = "";
+                        document.getElementById("nombre").value = "";
+                        document.getElementById("direccion").value = "";
+                        document.getElementById("PREMIUM").value = "";
+                    };
+                }
+            }
+        }
+        function habilitar(){
+            $("tbody")
+            $("$(td:parent").css("backgroundColor","yellow");
+        }
+    </script>
+</body>
+
+</html>
