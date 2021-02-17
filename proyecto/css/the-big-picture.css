@@ -1,0 +1,176 @@
+body {
+  background: url('../img/imagen.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+#estrellaImagen { background: url("../img/estrella.jpg") no-repeat center center fixed}
+
+h1{
+  color: white;
+}
+p{
+  color: white;
+}
+a.button1{
+  text-decoration: none;
+}
+.button1{
+  display:inline;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  text-align:center;
+  transition: all 0.2s;
+  }
+  .formPlanetas{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Verdana', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: rgb(56, 61, 61);
+  }
+  #centrar-boton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  }
+  a.button1:hover{
+  color:#000000;
+  background-color:#FFFFFF;
+  }
+  .button1:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+    }
+  @media all and (max-width:30em){
+   a.button1{
+  display:block;
+  margin:0.4em auto;
+  }
+  }
+.formulario{
+  padding-top: 30px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+.formulario button{
+  background-color: green;
+}
+label{
+  display: block;
+  position: relative;
+}
+input[type=text]{
+  border: 1px solid black ;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin:0px auto; 
+  display:block;
+  padding-top: 10px;
+}
+input[type=submit]{
+  padding-top: 10px;
+  background-color: #ffffff;
+  border: none;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  height: 60px;
+    width: 120px;
+    border-radius: 22%;
+    border: 1px solid #000;
+    background-color: rgb(185, 194, 182);
+}
+input[type=submit]:hover{
+  background-color: gray;
+  color: white;
+}
+.formulario h1{
+  color: rgb(255, 233, 233);
+}
+#cuadroIzquierda {
+  border: 12px solid gray;
+  width: 30%;
+  float: left;
+  margin:20px;
+  padding: 30px 30px;
+  background-color: white;
+}
+
+#cuadroDerecha {
+  border: 12px solid gray;
+  width: 30%;
+  float: right;
+  margin:20px;
+  padding: 30px 30px;
+  background-color: white;
+}
+
+#lista{
+  border: 12px solid gray;
+  width: 10%;
+  float: right;
+  margin:15px;
+  padding: 30px 30px;
+  background-color: white;
+  text-align: center;
+}
+
+#cuadroAbajo {
+  border: 12px solid gray;
+  width: 15%;
+  float: right;
+  margin:20px;
+  padding: 30px 30px;
+  background-color: white;
+}
+
+#cuadroSuperior {
+  border: 5px solid gray;
+  width: 66%;
+  margin:20px;
+  padding: 30px 30px;
+  background-color: white;
+}
+
+
+
+option {
+  background-color:tan;
+  padding: 10px;
+  font-size: 14px;
+}
+
+span {
+  color:rgb(61, 67, 71);
+  font-family: verdana;
+  font-size: 20px;
+}
+
+#cuadroDerecha div {
+  padding: 10px 10px;
+}
+
+

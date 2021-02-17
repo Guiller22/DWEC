@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  body {
+    background: url('estrella.jpg') no-repeat center center fixed;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  p {
+    color: white;
+  }
+
+  label {
+    color: white;
+  }
+
+  .formulario .botonDescargar {
+    width: 30%;
+  }
+</style>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>The Big Picture - Start Bootstrap Template</title>
+
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/the-big-picture.css" rel="stylesheet">
+  <script src="jsPDF-1.3.2/dist/jspdf.min.js"></script>
+  <script src="scripts/imagenURL.js"></script>
+
+</head>
+
+<body id="estrellaImagen">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">PlanetWeb</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="subscripcion.html">Subscribete para recibir novedades
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="planetas.html">Planetas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="asteroides.html">Asteroides</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="formulario">
+    <form>
+      <h1>Registro para apadrinar tu estrella</h1>
+
+      <label for="nombre">Nombre</label>
+      <input type="text" id="fname" name="nombre" placeholder="Nombre..">
+
+      <label for="apellido">Apellido</label>
+      <input type="text" id="apellido" name="apellido" placeholder="Apellido..">
+
+      <label for="id">DNI</label>
+      <input type="text" id="dni" name="dni" placeholder="DNI..">
+
+      <label for="nacimiento">Fecha Adquisicion:</label>
+
+      <input type="date" id="fecha" name="fecha_adq">
+
+
+      <label for="pais">Pais</label>
+      <select id="pais" name="pais">
+        <option value="España">España</option>
+        <option value="Francia">Francia</option>
+        <option value="Alemania">Alemania</option>
+        <option value="Rusia">Rusia</option>
+        <option value="Australia">Australia</option>
+      </select>
+
+      <label for="correo">E-mail</label>
+      <input type="text" id="correo" name="correo" placeholder="Email..">
+
+      Recordar
+      <input type="checkbox" id="recordar" name="recordar">
+      <br>
+      <input type="submit" onclick="notificacion()" class="botonDescargar" value="Descargar Certificado">
+
+      <br /><br /><br />
+
+    </form>
+  </div>
+  </div>
+  </div>
+
+  </section>
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="scripts/crearAlmacenes.js"></script>
+  <script>
+    function leerCookie(clave) {
+      var resultado = "";
+      var busqueda = clave + "=";
+
+      var listCookies = document.cookie.split(';');
+      var par = "";
+
+      for (var i = 0; i < listCookies.length; i++) {
+        par = listCookies[i]; //Cada elemento del array de cookies: nombre de la cookie y carácter =
+
+        //Se quitan los espacios en blanco 
+        while (par.charAt(0) == ' ') {
+          par = par.substring(1);
+        }
+
+        //Se compara los que buscamos con el elemento del array. Si devuelve como índice 0 se ha encontrado
+        if (par.indexOf(busqueda) == 0) {
+          resultado = par.substring(busqueda.length, par.length);
+        }
+      }
+      return resultado;
+    }
+
+    function notificacion() {
+      var nombre = document.getElementById("fname").value;
+      var poseedorAp = document.getElementById("apellido").value;
+      var doc = new jsPDF();
+
+
+      doc.setFontSize(40);
+      doc.text(20, 20, "CERTIFICADO ESTRELLA");
+      doc.setFontSize(16);
+      doc.text(20, 30, "Ehnorabuena en tu nueva estrella " + nombre + " " + poseedorAp + ".");
+
+      doc.addImage(imgData, 'JPEG', 10, 40, 180, 180);
+      doc.save('CertificadoEstrella.pdf');
+      /*if (document.getElementById("recordar").checked) {
+        var u = document.getElementById("fname").value;
+        var a = document.getElementById("apellido").value;
+        var d = new Date();
+        d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookieNombre = "fname=" + u + ";" + expires;
+        document.cookieApell = " apellido=" + a + ";" + expires;
+        var cookieUsuario = leerCookie("usuario");
+        if (cookieUsuario != "") {
+          document.getElementById("fname").value = cookieUsuario;
+        } else {
+          document.getElementById("fname").value = "";
+        }
+        alert(document.cookie)
+      }*/
+    }
+  </script>
+</body>
+
+</html>
