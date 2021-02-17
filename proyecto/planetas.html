@@ -115,9 +115,9 @@
     $(document).ready(function () {
       $(".imagenSecundaria").on("error", function () {
         $(this).attr('src', 'img/default.png');
+        //$(this).attr('width', '1000');
       });
     });
-  </script>
   </script>
   <script>
     function iniciar() {
@@ -136,7 +136,7 @@
 
     function arrastrado(e) {
       let error = "default";
-      var codigo = '<img src="img/' + origen1.value + '.png" class = imagenSecundaria onerror="this.onerror=null;this.src="img/default.png">';
+      var codigo = '<img src="img/' + origen1.value + '.png" class = imagenSecundaria onerror="this.onerror=null; this.src=\'img/default.png\'">';
       e.dataTransfer.setData('Text', codigo);
     }
 

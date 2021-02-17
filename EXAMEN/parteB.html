@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMEN 3 PARTE B</title>
+</head>
+
+<body>
+    <h1>EXAMEN 3 PARTE B</h1>
+    <hr>
+    id<br>
+    <input type="text" id="id" required="required" /><br /><br />
+
+    Nombre<br>
+    <input type="text" id="nombre" required="required" /><br /><br />
+
+    Dirección
+    <br /><input type="text" id="direccion" required="required" /> <br>
+    <br>
+    Sexo<br />
+    <input type="radio" name="sexo" value="hombre" id="sexoM" />Masculino<br />
+    <input type="radio" name="sexo" value="mujer" id="sexoF"/>Femenino<br />
+    <br />
+
+    Premium<br />
+    <input type="checkbox" name="premium" value="yes" id="premium" checked="checked" />
+    <br />
+    
+    <button onclick="enviarDatos();">Enviar datos a C</button>
+<script>
+    function enviarDatos() {
+			var socio = {};
+
+			socio.id = document.getElementById("id").value;
+
+			socio.nombre = document.getElementById("nombre").value;
+
+			socio.direccion = document.getElementById("direccion").value;
+
+            if(document.getElementById("sexoM").checked) {
+                socio.sexo = document.getElementById("sexoM").value;
+				}
+				if(document.getElementById("sexoF").checked) {
+					socio.sexo = document.getElementById("sexoF").value;
+				}
+
+			if (document.getElementById("premium").checked) {
+				socio.premium = true;
+			} else {
+				socio.premium = false;
+			}
+
+			var datosSocio = JSON.stringify(socio);
+			localStorage.setItem("nuevosocio", datosSocio);
+        }
+	
+</script>
+</body>
+
+</html>

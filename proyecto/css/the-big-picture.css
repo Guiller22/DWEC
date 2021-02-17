@@ -21,7 +21,7 @@ a.button1{
   padding:0.35em 1.2em;
   border:0.1em solid #FFFFFF;
   margin:0 0.3em 0.3em 0;
-  border-radius:0.12em;
+  border-radius: 10px;
   box-sizing: border-box;
   text-decoration:none;
   font-family:'Roboto',sans-serif;
@@ -99,7 +99,7 @@ input[type=submit]{
   cursor: pointer;
   height: 60px;
     width: 120px;
-    border-radius: 22%;
+    border-radius: 10px;
     border: 1px solid #000;
     background-color: rgb(185, 194, 182);
 }
@@ -130,10 +130,10 @@ input[type=submit]:hover{
 
 #lista{
   border: 12px solid gray;
-  width: 10%;
+  width: 20%;
   float: right;
   margin:15px;
-  padding: 30px 30px;
+  min-height: 50px;
   background-color: white;
   text-align: center;
 }

@@ -19,6 +19,7 @@
 
   .formulario .botonDescargar {
     width: 30%;
+    
   }
 </style>
 
@@ -72,13 +73,13 @@
       <h1>Registro para apadrinar tu estrella</h1>
 
       <label for="nombre">Nombre</label>
-      <input type="text" id="fname" name="nombre" placeholder="Nombre..">
+      <input type="text" id="fname" name="nombre" pattern="[a-z]{1,15}" placeholder="Nombre..">
 
       <label for="apellido">Apellido</label>
-      <input type="text" id="apellido" name="apellido" placeholder="Apellido..">
+      <input type="text" id="apellido" name="apellido" pattern="[a-z]{1,15}" placeholder="Apellido..">
 
       <label for="id">DNI</label>
-      <input type="text" id="dni" name="dni" placeholder="DNI..">
+      <input type="text" id="dni" name="dni" pattern="[0-9]{8}[A-Za-z]{1}" placeholder="DNI..">
 
       <label for="nacimiento">Fecha Adquisicion:</label>
 
@@ -115,28 +116,6 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="scripts/crearAlmacenes.js"></script>
   <script>
-    function leerCookie(clave) {
-      var resultado = "";
-      var busqueda = clave + "=";
-
-      var listCookies = document.cookie.split(';');
-      var par = "";
-
-      for (var i = 0; i < listCookies.length; i++) {
-        par = listCookies[i]; //Cada elemento del array de cookies: nombre de la cookie y carácter =
-
-        //Se quitan los espacios en blanco 
-        while (par.charAt(0) == ' ') {
-          par = par.substring(1);
-        }
-
-        //Se compara los que buscamos con el elemento del array. Si devuelve como índice 0 se ha encontrado
-        if (par.indexOf(busqueda) == 0) {
-          resultado = par.substring(busqueda.length, par.length);
-        }
-      }
-      return resultado;
-    }
 
     function notificacion() {
       var nombre = document.getElementById("fname").value;
@@ -147,26 +126,16 @@
       doc.setFontSize(40);
       doc.text(20, 20, "CERTIFICADO ESTRELLA");
       doc.setFontSize(16);
-      doc.text(20, 30, "Ehnorabuena en tu nueva estrella " + nombre + " " + poseedorAp + ".");
+      doc.text(20, 30, "Enhorabuena en tu nueva estrella " + nombre + " " + poseedorAp + ".");
 
       doc.addImage(imgData, 'JPEG', 10, 40, 180, 180);
       doc.save('CertificadoEstrella.pdf');
-      /*if (document.getElementById("recordar").checked) {
-        var u = document.getElementById("fname").value;
-        var a = document.getElementById("apellido").value;
-        var d = new Date();
-        d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
-        var expires = "expires=" + d.toUTCString();
-        document.cookieNombre = "fname=" + u + ";" + expires;
-        document.cookieApell = " apellido=" + a + ";" + expires;
-        var cookieUsuario = leerCookie("usuario");
-        if (cookieUsuario != "") {
-          document.getElementById("fname").value = cookieUsuario;
-        } else {
-          document.getElementById("fname").value = "";
-        }
-        alert(document.cookie)
-      }*/
+      if (document.getElementById("recordar").checked) {
+        var name = document.getElementById("fname").value;
+        var apell = document.getElementById("apellido").value;
+				window.localStorage.setItem(name,apell);
+				localStorage.setItem(name,apell);
+      }
     }
   </script>
 </body>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMEN 3 PARTE A</title>
+</head>
+
+<body>
+    <h1>EXAMEN 3 PARTE A</h1>
+    <hr>
+    <button onclick="crearBD()">CREAR BASES DE DATOS</button>
+    <br /><br />
+    <textarea id="info" cols="120" rows="20"></textarea>
+    <script>
+        function crearBD() {
+            var peticion,bd,almacenSocios;
+            function mensaje(texto) {
+				document.getElementById("info").value += "\n\n" + texto;
+			}
+            if (window.indexedDB) {
+					peticion = window.indexedDB.open("Examen");
+					
+					peticion.onsuccess =  function (evento) {
+						mensaje("EVENTO: success\nSe ha abierto correctamente la base de datos: " + peticion.result.name + " con versión " + peticion.result.version);
+						bd.close();
+					};
+			
+					//ONERROR
+					peticion.onerror = function (evento) {
+						mensaje("EVENTO: error\nNo se ha abierto la base de datos");
+					};
+
+		
+					//ONUPGRADENEEDED
+					peticion.onupgradeneeded = function (evento) {
+						mensaje("EVENTO: upgradedneeded\nSe modifica la versión o es nueva");
+
+						bd = peticion.result;
+
+						mensaje("SE CREAN LOS ALMACENES");
+						almacenPersonas = bd.createObjectStore("Socios", {keyPath:"id"});
+					};
+		
+					//ONBLOCKED
+					peticion.onblocked = function (evento) {
+						mensaje("EVENTO: blocked\nBase de datos bloqueada");
+					};
+		
+				} else {
+					console.log("IndexedDB no está soportado");
+				}
+			}
+    </script>
+</body>
+
+</html>
