@@ -110,8 +110,16 @@
     $(document).ready(function () {
       crearIndicesBD();
     });
-    </script>
-    <script>
+  </script>
+  <script>
+    $(document).ready(function () {
+      $(".imagenSecundaria").on("error", function () {
+        $(this).attr('src', 'img/default.png');
+      });
+    });
+  </script>
+  </script>
+  <script>
     function iniciar() {
 
       origen1 = document.getElementById('nombre');
@@ -128,7 +136,7 @@
 
     function arrastrado(e) {
       let error = "default";
-      var codigo = '<img src="img/' + origen1.value + '.png" onerror="this.onerror=null; this.src="Defaul.png">';
+      var codigo = '<img src="img/' + origen1.value + '.png" class = imagenSecundaria onerror="this.onerror=null;this.src="img/default.png">';
       e.dataTransfer.setData('Text', codigo);
     }
 
