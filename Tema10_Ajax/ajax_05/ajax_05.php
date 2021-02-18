@@ -1,8 +1,8 @@
 <?php
 	$servername = "localhost";
 	$dbName = "dwec_biblioteca";
-	$username = "root";
-	$password = "";
+	$username = "profesor";
+	$password = "profesor";
 
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=$dbName;charset=utf8", $username, $password);
@@ -11,12 +11,25 @@
 		if(isset($_GET["editorial"])) {
 			$editorial = $_GET["editorial"];
 			foreach($conn->query("SELECT * FROM libros where editorial ='" . $editorial . "'") as $fila) {
-				echo "<option value='".$fila["Id"]."'>".$fila["titulo"]."</option>";
+				//NO --> echo "<option value='".$fila["Id"]."'>".$fila["titulo"]."</option>";
+
+				$libro = new stdClass();
+
+				$libro->isbn = $fila["Id"];
+				$libro->titulo = $fila["titulo"];
+
+				$listaLibros[] = $libro;
 			}
+			echo json_encode($listaLibros);
 		} else {
 			foreach($conn->query("SELECT distinct editorial FROM libros order by editorial") as $fila) {
-				echo "<option>".$fila["editorial"]."</option>";
+				//NO --> echo "<option>".$fila["editorial"]."</option>";
+
+				$editorial = new stdClass();
+
+				$listaEditoriales[] = $fila["editorial"];
 			}
+			echo json_encode($listaEditoriales);
 		}
 
 	} catch(PDOException $e) {

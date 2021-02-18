@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ajax_07 - Temperaturas por provincias con JSON</title>
+		<link rel="icon" type="image/x-icon" href="../recursos/favicon.ico">
+		<style type="text/css">
+			div {
+				border: 2px solid red;
+			}
+		</style>
+	</head>
+	<body onload="peticionTemperaturas();setInterval(peticionTemperaturas,10000);">
+		<h1>ajax_07 - Temperaturas por provincias con JSON</h1>
+		<hr />
+		Requiere una base de datos de temperaturas. Cambiar las temperaturas manualmente en la base de datos.
+		<hr />
+		<br />
+
+		<table border="2">
+			<tbody id="datos"></tbody>
+		</table>
+
+		<hr />
+
+		<h3>Datos desde la base de datos en formato json</h3>
+		<div id="datosjson"></div>
+
+		<script type="text/javascript">
+
+			function procesarDatos(_registro) {
+				var fila, celda, estadoTiempo;
+
+				document.getElementById("datos").innerHTML = "";
+
+				_registro.forEach(function (_elemento) {
+					fila = document.createElement("tr");
+
+					for(var i in _elemento) {
+						if(i=="provincia" || i=="temperatura") {
+							celda = document.createElement("td");
+							celda.appendChild(document.createTextNode(_elemento[i].toUpperCase()));
+							fila.appendChild(celda);
+						}
+
+						if(i=="estado") {
+							switch (_elemento[i]) {
+								case '1':estadoTiempo = "SOLEADO";break;
+								case '2':estadoTiempo = "NUBLADO";break;
+								case '3':estadoTiempo = "LLUVIOSO";break;
+								case '4':estadoTiempo = "NEVANDO";break;
+								case '5':estadoTiempo = "VIENTO";break;
+								case '6':estadoTiempo = "TORMENTAS";break;
+								default:estadoTiempo = "SIN INFORMACIÓN";break;
+							}
+							celda = document.createElement("td");
+							celda.appendChild(document.createTextNode(estadoTiempo.toUpperCase()));
+							fila.appendChild(celda);
+						}
+					}
+					document.getElementById("datos").appendChild(fila);
+				});
+			}
+
+
+			function peticionTemperaturas() {
+				var peticion;
+				if(window.XMLHttpRequest) {
+					peticion = new XMLHttpRequest();
+				} else if(window.ActiveXObject) {
+					peticion = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				peticion.open('GET','ajax_07.php',true);
+				peticion.send(null);
+
+				peticion.onreadystatechange = function (evento) {
+					if((peticion.readyState == 4) && ((peticion.status == 200) )){
+						document.getElementById("datosjson").innerText = peticion.responseText;
+						var datos = JSON.parse(peticion.responseText);
+						procesarDatos(datos);
+					}
+				};
+			}
+
+		</script>
+	</body>
+</html>

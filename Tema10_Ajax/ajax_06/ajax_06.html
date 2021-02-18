@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html>
+	<head>
 		<meta charset="utf-8">
-		<title>ajax_06 - Seleccionar libros por editorial</title>
+		<title>ajax_06 - Sugerir libros a partir de un texto</title>
 		<link rel="icon" type="image/x-icon" href="../recursos/favicon.ico">
 		<style type="text/css">
 			div {
@@ -10,62 +10,51 @@
 			}
 		</style>
 	</head>
-	<body onload="peticionEditoriales();">
-		<h1>ajax_05 - Seleccionar libros por editorial</h1>
+	<body>
+		<h1>ajax_06 - Sugerir libros a partir de un texto</h1>
 		<hr />
-
+		Se usa la base de datos de la biblioteca
+		
 		<br /><br />
 
-		<!-- PASO 1: petición javascript -->
-		Selecciona editorial<br />
-		<select id="selectEditorial" onchange="peticionLibros();">
-		</select>
-
-		<br /><br />
-
-		Selecciona libro<br />
-		<select id="selectLibros"></select>
+		Introduce un título<br />
+		<input type="text" id="texto" size="50" onkeyup="pedirLibros(event);" />
 
 		<script type="text/javascript">
+			var peticion;
 
-			function peticionEditoriales() {
-				var peticion;
-				if(window.XMLHttpRequest) {
-					peticion = new XMLHttpRequest();
-				} else if(window.ActiveXObject) {
-					peticion = new ActiveXObject("Microsoft.XMLHTTP");
-				}
-				peticion.open('GET','ajax_05.php',true);
-				peticion.send(null);
-
-				peticion.onreadystatechange = function (evento) {
-					if((peticion.readyState == 4) && ((peticion.status == 200) )){
-						document.getElementById("selectEditorial").innerHTML = peticion.responseText;
-						peticionLibros();
+			function procesadatos() {
+				if((peticion.readyState == 4) && ((peticion.status == 200) )){
+					var resp=JSON.parse(peticion.responseText);
+					if(resp!="") {
+						var caja=document.getElementById("texto");
+						var inicioSel=caja.value.length;
+						caja.value=resp;
+						caja.selectionStart=inicioSel;
+						caja.selectionEnd=caja.value.length;
+						caja.setSelectionRange(inicioSel,caja.value.length);
 					}
-  				};
-  			}
-
-
-			function peticionLibros() {
-				var peticion;
-				if(window.XMLHttpRequest) {
-					peticion = new XMLHttpRequest();
-				} else if(window.ActiveXObject) {
-					peticion = new ActiveXObject("Microsoft.XMLHTTP");
 				}
-				var veditorial = document.getElementById("selectEditorial").value;
-
-				peticion.open('GET','ajax_05.php?editorial=' + veditorial,true);
-				peticion.send(null);
-
-				peticion.onreadystatechange = function (evento) {
-					if((peticion.readyState == 4) && ((peticion.status == 200) )){
-						document.getElementById("selectLibros").innerHTML = peticion.responseText;
-					}
-  				};
 			}
 
+
+			function pedirLibros(event) {
+				if( (event.keyCode>=48 && event.keyCode<=57) || (event.keyCode>=65 && event.keyCode<=90) ||
+				(event.keyCode>=219 && event.keyCode<=222) || (event.keyCode>=186 && event.keyCode<=192) ||
+				(event.keyCode==32) ) {
+					if(window.XMLHttpRequest) {
+						peticion = new XMLHttpRequest();
+					} else if(window.ActiveXObject) {
+						peticion = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					var caja=document.getElementById("texto");
+					var texto=caja.value;
+					peticion.open('GET','ajax_06.php?texto='+texto,true);
+					peticion.onreadystatechange=procesadatos;
+					peticion.send(null);
+				}
+			}
+			
 		</script>
 	</body>
 </html>

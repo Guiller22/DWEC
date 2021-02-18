@@ -40,7 +40,17 @@
 
 				peticion.onreadystatechange = function (evento) {
 					if((peticion.readyState == 4) && ((peticion.status == 200) )){
-						document.getElementById("selectEditorial").innerHTML = peticion.responseText;
+						var editoriales = JSON.parse(peticion.responseText);
+						var cadenaHTML = "";
+						var opcion;
+
+						document.getElementById("selectEditorial").innerHTML = "";
+						editoriales.forEach(function (_elemento) {
+							opcion = document.createElement("OPTION");
+							opcion.innerText = _elemento;
+							document.getElementById("selectEditorial").appendChild(opcion);
+						});
+
 						peticionLibros();
 					}
   				};
@@ -61,7 +71,18 @@
 
 				peticion.onreadystatechange = function (evento) {
 					if((peticion.readyState == 4) && ((peticion.status == 200) )){
-						document.getElementById("selectLibros").innerHTML = peticion.responseText;
+						//document.getElementById("selectLibros").innerHTML = peticion.responseText;
+						var libros = JSON.parse(peticion.responseText);
+						var cadenaHTML = "";
+						var opcion;
+
+						document.getElementById("selectLibros").innerHTML = "";
+						libros.forEach(function (_elemento) {
+							opcion = document.createElement("OPTION");
+							opcion.setAttribute("value",_elemento.Id);
+							opcion.innerText = _elemento.titulo;
+							document.getElementById("selectLibros").appendChild(opcion);
+						});
 					}
   				};
 			}

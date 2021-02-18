@@ -21,6 +21,7 @@
 
 		<br /><br />
 
+		<h3>Títulos en formato JSON: array de títulos</h3>
 		<div id="contenido"></div>
 
 		<script type="text/javascript">
@@ -42,7 +43,7 @@
   				peticion.onreadystatechange = function (evento) {
 					if((peticion.readyState == 4) && ((peticion.status == 200) )){
 						//PASO 5: procesar la respuesta
-						document.getElementById("contenido").innerHTML = peticion.responseText;
+						document.getElementById("contenido").innerText += peticion.responseText;
 					}
   				};
 			}
