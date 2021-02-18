@@ -39,7 +39,7 @@
     </nav>
 
     <div class="formulario">
-        <form onsubmit="guardarValores()">
+        <form>
             <h1>Registro para recibir información sobre nuestra página</h1>
             <label id="nombre" for="nombre">Nombre</label>
             <input class="formRegist" type="text" id="fname" name="nombre" placeholder="Nombre..">
@@ -59,6 +59,8 @@
             <label for="correo">E-mail</label>
             <input type="text" id="correo" name="correo" placeholder="Email..">
 
+            Recordar
+            <input type="checkbox" id="recordar" name="recordar">
             <input type="submit" onclick="notificacion()" value="Registrar">
 
         </form>
@@ -67,13 +69,21 @@
         function notificacion() {
             alert("Hola\n" + document.getElementById("fname").value);
         }
-        function guardarValores(){
-        setCookie("usuario", form.fname.value);
-        return true;
-    }
+
+        function guardarValores() {
+            if (document.getElementById("recordar").checked) {
+                var name = document.getElementById("fname").value;
+                var d = new Date();
+                var nombre = document.getElementById("fname");
+                d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+                var caduca = "expires=" + d.toUTCString();
+                document.cookie = "nombre=" + name + ";" + caduca;
+                alert("Hola\n" + document.cookie + "");
+            }
+        }
     </script>
-<script>
-    
-</script>
+    <script>
+
+    </script>
 
 </html>

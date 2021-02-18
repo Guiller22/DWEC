@@ -60,9 +60,6 @@
           <li class="nav-item">
             <a class="nav-link" href="asteroides.html">Asteroides</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -96,12 +93,12 @@
       </select>
 
       <label for="correo">E-mail</label>
-      <input type="text" id="correo" name="correo" placeholder="Email..">
+      <input type="text" id="correo" name="correo" placeholder="Email.." pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
 
       Recordar
       <input type="checkbox" id="recordar" name="recordar">
       <br>
-      <input type="submit" onclick="notificacion()" class="botonDescargar" value="Descargar Certificado">
+      <input type="submit" onclick="notificacion()" class="botonDescargar" value="Descargar Certificado" id="enviar">
 
       <br /><br /><br />
 
