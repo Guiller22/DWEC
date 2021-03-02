@@ -25,10 +25,11 @@
             color: red;
         }
 
-        td {
-            width: 20px;
-            height: 20px;
-            text-align: center;
+        tbody{
+            display: none;
+        }
+        tbody,td,tr{
+            border: 2px solid black;
         }
     </style>
 </head>
@@ -36,19 +37,20 @@
 <body>
     <h1>Examen 2</h1>
     <hr>
-    <span id="obligatorio" draggable="true" ondragstart=fase1(evento) ondragover="fase2(evento)"
-        ondragend="fase3(evento)">OBLIGATORIO</span>
+    <span id="obligatorio" draggable="true" ondragstart="fase1(event)" ondragover="fase2(event)"
+    ondrop="fase3(event)">OBLIGATORIO</span>
 
-    <div id="cuadrodni" class="no" draggable="true" ondragstart=fase1(evento)>
+    <div id="cuadrodni" class="no" draggable="true" ondragstart="fase1(event)" ondragover="fase2(event)"
+    ondrop="fase3(event)" >
         DNI<br>
         <input type="text" id="dni">
     </div>
-    <div id="cuadronombre" class="no" draggable="true" ondragstart=fase1(evento) ondragover="fase2(evento)"
-        ondragend="fase3(evento)">
+    <div id="cuadronombre" class="no" draggable="true" ondragstart="fase1(event)" ondragover="fase2(event)"
+    ondrop="fase3(event)" >
         Nombre<br>
         <input type="text" id="nombre"></div>
-    <div id="cuadrotelefono" class="no" draggable="true" ondragstart=fase1(evento) ondragover="fase2(evento)"
-        ondragend="fase3(evento)">
+    <div id="cuadrotelefono" class="no" draggable="true" ondragstart="fase1(event)" ondragover="fase2(event)"
+    ondrop="fase3(event)" >
         Telefono<br>
         <input type="text" id="telefono"></div>
     <p id="datos"></p>
@@ -57,14 +59,27 @@
     <br>
 
     <table>
-        <tbody id="tabla"></tbody>
+        <tbody id="tabla">
+            <tr><td>DNI</td><td>Nombre</td><td>Telefono</td></tr>
+        </tbody>
     </table>
 
     <script type="text/javascript">
         var contenedores = document.getElementsByTagName("div");
-
+        for (i=0; i<contenedores.length; i++){
+            contenedores[i].className ="no";
+        }
+        var inputDni,inputNombre,inputTelefono;
+        inputDni=document.getElementById("dni").getAttribute("required");
+        inputNombre=document.getElementById("nombre").getAttribute("required");
+        inputTelefono=document.getElementById("telefono").getAttribute("required");
+        var cont;
         function fase1(pEvento) {
             pEvento.dataTransfer.setData("", pEvento.target.id);
+            if(pEvento.target.id!="obligatorio"){
+                pEvento.target.className="no";
+                cont.removeAttribute("required");
+            }
         }
 
         function fase2(pEvento) {
@@ -72,31 +87,62 @@
         }
 
         function fase3(pEvento) {
-            if (pEvento.dataTransfer.getData("")=="obligatorio") {
-                    var copia = document.getElementById("obligatorio").cloneNode(true);
-                    document.getElementById("contenedores").innerHTML = copia;
-                    event.target(copia);
+            if(pEvento.target.id!="obligatorio"){
+                pEvento.target.className="si";
+                cont = pEvento.target.children[1];
+                cont.setAttribute("required",true);
             }
             }
 
 
-            function enviar() {
-                var dni = document.getElementById("dni").value;
-                var nombre = document.getElementById("nombre").value;
-                var telefono = document.getElementById("telefono").value;
-				/*var datos=document.getElementById("input").value;*/
-                var tabla = document.getElementById("tabla");
-                var fila, td;
-                for (i = 0; i < datos.length; i++) {
-                    fila = document.createElement("tr");
-                    td = document.createElement("td");
-                    tabla.appendChild(fila);
-                    for(j=0;j<3;i++){
-                        fila = document.getElementById("nombre").value;
-                    }
+            function enviar(){
+            //valores de los inputs
+            var vDni,vNombre,vTelefono;
+            vDni = document.getElementById("dni").value;
+            vNombre = document.getElementById("nombre").value;
+            vTelefono = document.getElementById("telefono").value;
 
-                }
+            //nodo tbody
+            var tabla = document.getElementById("tabla");
+            var filasTabla = document.getElementsByTagName("tr");
+
+            //Crear Fila
+            var fila = document.createElement("tr");
+            //Eliminar Fila al hacer doble Click
+            fila.addEventListener("dblclick", function(e){
+                var tbody = this.parentElement;
+                tbody.removeChild(this);
+            });
+            //Comprobar si un campo es obligatorio
+            if((vDni=="")&&(vNombre=="")&&(vTelefono=="")){
+                alert("Inserta como mínimo un campo");
+            }else if((inputDni=true)&&(vDni=="")){
+                alert("DNI Obligatorio");
+            }else if((inputNombre=true)&&(vNombre=="")){
+                alert("Nombre Obligatorio");
+            }else if((inputTelefono=true)&&(vTelefono=="")){
+                alert("Telefono Obligatorio");
+            }else{
+                tabla.style.display = "block";
+                tabla.appendChild(fila);
+                //td dni
+                var celdaDni = document.createElement("td");
+                var contenidoDni = document.createTextNode(vDni);
+                //td nombre
+                var celdaNombre = document.createElement("td");
+                var contenidoNombre = document.createTextNode(vNombre);
+                //td Telefono
+                var celdaTelefono = document.createElement("td");
+                var contenidoTelefono = document.createTextNode(vTelefono);
+
+                celdaDni.appendChild(contenidoDni);
+                celdaNombre.appendChild(contenidoNombre);
+                celdaTelefono.appendChild(contenidoTelefono);
+                fila.appendChild(celdaDni);
+                fila.appendChild(celdaNombre);
+                fila.appendChild(celdaTelefono); 
             }
+        }
     </script>
 
 </body>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>EXAMEN 3 PARTE C</title>
+    <script src="recursos/jquery-3.5.1.js"></script>
 </head>
 <style>
     .botonInsertar {
@@ -13,6 +14,13 @@
     .botonVisible {
         visibility: visible;
     }
+    table, tr, th, td {
+            border: 1px solid black;
+        }
+        th,td{
+            padding: 5px;
+            text-align: center;
+        }
 </style>
 
 <body>
@@ -25,27 +33,17 @@
     <p id="accionRealizada"></p>
     <BR>
     <BR>
-    <button onclick="verDatos()">VER SOCIOS DE LA BASE DE DATOS</button>
+    <button onclick="verDatos()" disabled="true" id="boton1">VER SOCIOS DE LA BASE DE DATOS</button>
     <br>
     <br>
-    <button onclick="habilitar()">HABILITAR JQUERY</button>
+    <button onclick="habilitar()" disabled="true" id="boton2">HABILITAR JQUERY</button>
     <br>
     <br>
     <br>
-    <table id="tabla1" border="1">
-        <tbody>
-            <tr>
-				<td>Prueba</td>
-				<td>A</td>
-				<td>B</td>
-				<td>C</td>
-			</tr>
-			<tr>
-				<td>Prueba</td>
-				<td>D</td>
-				<td>E</td>
-				<td>F</td>
-			</tr>
+    <table>
+        <tbody id="tablaSocios">
+
+        </tbody>
     </table>
 
     <script type="text/javascript">
@@ -97,6 +95,8 @@
                     } else {
                         document.getElementById("accionRealizada").innerHTML = "MODIFICADO";
                     }
+                    document.getElementById("boton1").disabled = false;
+                    
                 };
 
 
@@ -114,31 +114,42 @@
         }
 
         function verDatos() {
-            if (window.indexedDB) {
+            document.getElementById("boton2").disabled = false;
+            var cabecera="<tr><th>ID</th><th>Nombre</th><th>Direccion</th><th>Sexo</th><th>Premium</th></tr>";
+            document.getElementById("tablaSocios").innerHTML=cabecera;
+            if(window.indexedDB){
                 peticion = window.indexedDB.open("Examen");
 
-                peticion.onsuccess = function (evento) {
-                    bd = evento.target.result;
+                peticion.onsuccess=function(evento){
+                    bd=evento.target.result;
+                    var transaccion = bd.transaction(bd.objectStoreNames,"readwrite");
+                    almacenSocios = transaccion.objectStore("Socios");
 
-                    transaccion = bd.transaction(bd.objectStoreNames, "readwrite");
-                    almacen = transaccion.objectStore("Socios");
+                    var peticionGetAll = almacenSocios.getAll();
 
-                    document.getElementById("lista").innerHTML = "";
-
-                    var peticionCursor = almacen.openCursor();
-                    peticionCursor.onsuccess = function (evento) {
-                        var cursor = peticionCursor.result;
-                        document.getElementById("id").value = "";
-                        document.getElementById("nombre").value = "";
-                        document.getElementById("direccion").value = "";
-                        document.getElementById("PREMIUM").value = "";
-                    };
+                    peticionGetAll.onsuccess = function(){
+                        var valores = peticionGetAll.result;
+                        for(socio in valores){
+                            insertarElemento(valores[socio]);
+                        }
+                    }
                 }
             }
         }
+        function insertarElemento(socio){
+            var s = "<tr><td>"+socio.id+"</td><td>"+socio.nombre+"</td><td>"+socio.direccion+"</td><td>"+socio.sexo+"</td><td>"+socio.premium+"</td></tr>";
+            document.getElementById("tablaSocios").innerHTML+=s;
+        }
         function habilitar(){
-            $("tbody")
-            $("$(td:parent").css("backgroundColor","yellow");
+            $("th,td").click(function() {
+                $(this).css("backgroundColor","yellow");
+            })
+            $("tr>td:first").click(function(){
+                $(this).parent().remove();
+            })
+            $("th:first").dblclick(function(){
+                $(this).css("backgroundColor","white");
+            })
         }
     </script>
 </body>
