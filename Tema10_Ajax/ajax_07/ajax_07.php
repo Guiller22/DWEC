@@ -1,8 +1,8 @@
 <?php
 	$servername = "localhost";
 	$dbName = "dwec_temperaturas";
-	$username = "profesor";
-	$password = "profesor";
+	$username = "root";
+	$password = "toor";
 
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=$dbName;charset=utf8", $username, $password);

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Final Guille Parte A</title>
+</head>
+<style>
+    .incorrecto {
+        background-color: yellow;
+    }
+
+    .correcto {
+        background-color: white;
+    }
+</style>
+
+<body>
+
+    <h1>Examen Final</h1>
+    <hr>
+    DNI<br>
+    <input type="text" id="dni" required="required" /><br /><br />
+
+    Nombre<br>
+    <input type="text" id="nombre" required="required" /><br /><br />
+
+    Telefono
+    <br /><input type="text" id="telefono" required="required" /> <br>
+
+    Matricula
+    <br /><input type="text" id="matricula" required="required" /> <br>
+    <br>
+
+    
+    <br>
+    <table>
+        <tbody id="tabla">
+            <tr>
+                <td>DNI</td>
+                <td>Nombre</td>
+                <td>Telefono</td>
+                <td>Matricula</td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="enviarDatos();">Enviar datos</button>
+    <script>
+        function enviarDatos() {
+            var datosform = {};
+
+            datosform.dni = document.getElementById("dni").value;
+
+            datosform.nombre = document.getElementById("nombre").value;
+
+            datosform.telefono = document.getElementById("telefono").value;
+
+            datosform.matricula = document.getElementById("matricula").value;
+
+            var datosparseados = JSON.stringify(datosform);
+            localStorage.setItem("datos", datosparseados);
+        }
+        window.addEventListener("storage", function (event) { //RECIBIR
+            var datosJSON = localStorage.getItem("datosVuelta");
+            var dato = JSON.parse(datosJSON);
+            document.getElementById("dni").innerHTML = dato.dni;
+            document.getElementById("nombre").innerHTML = dato.nombre;
+            document.getElementById("matricula").innerHTML = dato.matricula;
+            document.getElementById("telefono").innerHTML = dato.telefono;
+
+            if (estadodni = "correcto") {
+                document.getElementById("dni").className = "correcto";
+            } else {
+                document.getElementById("dni").className = "incorrecto";
+            }
+
+            if (estadonombre = "correcto") {
+                document.getElementById("nombre").className = "correcto";
+            } else {
+                document.getElementById("nombre").className = "incorrecto";
+            }
+            if (estadomatricula = "correcto") {
+                document.getElementById("telefono").className = "incorrecto";
+            } else {
+                document.getElementById("telefono").className = "incorrecto";
+            }
+            if (estadotelefono = "correcto") {
+                document.getElementById("matricula").className = "correcto";
+            } else {
+                document.getElementById("matricula").className = "incorrecto";
+            }
+            if (estadomatricula = "correcto") {
+                document.getElementById("telefono").className = "incorrecto";
+            } else {
+                document.getElementById("telefono").className = "incorrecto";
+            }
+            contador = 0;
+            var vdni = document.getElementById("dni").value;
+            var vnombre = document.getElementById("nombre").value;
+            var vmatricula = document.getElementById("matricula").value;
+            var vtelefono = document.getElementById("telefono").value;
+
+            var fila = document.createElement("tr");
+
+            var tabla = document.getElementById("tabla");
+            var filasTabla = document.getElementsByTagName("tr");
+
+            tabla.appendChild(fila);
+            var celdaDni = document.createElement("td");
+            var contenidoDni = document.createTextNode(vdni);
+
+            var celdaNombre = document.createElement("td");
+            var contenidoNombre = document.createTextNode(vnombre);
+
+            var celdaTelefono = document.createElement("td");
+            var contenidoTelefono = document.createTextNode(vtelefono);
+
+            var celdaMatricula = document.createElement("td");
+            var contenidoMatricula = document.createTextNode(vmatricula);
+
+            celdaDni.appendChild(contenidoDni);
+            celdaNombre.appendChild(contenidoNombre);
+            celdaTelefono.appendChild(contenidoTelefono);
+            celdaMatricula.appendChild(contenidoMatricula);
+            fila.appendChild(celdaDni);
+            fila.appendChild(celdaNombre);
+            fila.appendChild(celdaTelefono);
+            fila.appendChild(celdaMatricula);
+
+            document.getElementById("dni").className = "correcto";
+            document.getElementById("nombre").className = "correcto";
+            document.getElementById("matricula").className = "correcto";
+            document.getElementById("telefono").className = "correcto";
+            contador++;
+            if(contador=3){
+                introducirindexdb()
+                setInterval(vaciarTabla,5000);
+            }
+            
+        })
+        function vaciarTabla(){
+            document.getElementById("tabla").removeChild;
+        }
+        function introducirindexdb() {
+            var datoJSON = localStorage.getItem("datos");
+            var dato = JSON.parse(datoJSON);
+
+            if (window.indexedDB) {
+                peticion = window.indexedDB.open("examenfinal");
+
+                peticion.onsuccess = function (evento) {
+                    console.log("Success");
+
+                    var bd = evento.target.result;
+
+                    var transaccion = bd.transaction(bd.objectStoreNames, "readwrite");
+                    var almacen = transaccion.objectStore("datos");
+
+                    almacen.add({ dni: parseInt(dato.dni), nombre: dato.nombre, telefono: dato.telefono, matricula: dato.matricula});
+
+                    
+                }
+            }
+
+        }
+    </script>
+</body>
+
+</html>

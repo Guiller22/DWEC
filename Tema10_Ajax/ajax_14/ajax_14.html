@@ -2,46 +2,88 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>ajax_13 - Ajax con jQuery - Consulta AJAX completa</title>
+		<title>ajax_14 - Ajax con jQuery - Rellenar datos de la tabla de libros</title>
 		<link rel="icon" type="image/x-icon" href="../recursos/favicon.ico">
 		<script type="text/javascript" src="../recursos/jquery-3.5.1.js"></script>
-		<style type="text/css">
-			div {
-				border: 2px solid red;
+		<style>
+			table,td {
+				border: 2px solid black;
+			}
+
+			td {
+				width: 200px;
+			}
+
+			th {
+				border: 2px solid blue;
+			}
+			span {
+				color: red;
 			}
 		</style>
 	</head>
 	<body">
-		<h1>ajax_14 - Ajax con jQuery </h1>
+		<h1>ajax_14 - Ajax con jQuery - Rellenar datos de la tabla de libros</h1>
 		<hr />
 		
-		<button id="boton">Petición</button>
+		<button id="boton">Rellenar datos de libros</button>
 
 		<br /><br />
 		
-		<div id="cuadro"></div>
+		<table>
+			<tr>
+				<th>ISBN</th><th>TÍTULO</th><th>AUTOR</th><th>EDITORIAL</th><th>PÁGINAS</th><th>PRECIO</th>
+			</tr>
+			<tr>
+				<td>7</td><td></td><td>A1</td><td></td><td></td><td>10</td>
+			</tr>
+			<tr>
+				<td>11</td><td></td><td>A2</td><td></td><td></td><td></td>
+			</tr>
+			<tr>
+				<td>15</td><td></td><td></td><td>E3</td><td>100</td><td></td>
+			</tr>
+			<tr>
+				<td>34</td><td></td><td>A4</td><td></td><td></td><td></td>
+			</tr>
+			<tr>
+				<td>63</td><td></td><td></td><td></td><td></td><td>20</td>
+			</tr>
+			<tr>
+				<td>71</td><td></td><td>A7</td><td></td><td></td><td></td>
+			</tr>
+			<tr>
+				<td>85</td><td></td><td></td><td></td><td></td><td>20</td>
+			</tr>
+		</table>
 
 		<script type="text/javascript">
 
 			$(document).ready(function(){ 
 				$("#boton").click(function() {
-					$.ajax({
-						url: "ajax_13.php",
-						type: "get",
-						data: "editorial=ANAYA",
-						datType: "html",
-						success: function (datos,estado,xhr) {
-							$("#cuadro").append(datos);
-						},
-						beforeSend: function (xhr) {
-							$("#cuadro").append("INICIO<hr />");
-						},
-						complete: function (xhr,estado) {
-							$("#cuadro").append("<hr />FINAL");
-						},
-						error: function (xhr,estado,error) {
-							alert(estado + " - " + error);
-						}
+					$("tr").find("td:first").text(function (fila,isbn) {
+						$.ajax({
+							url: "ajax_14.php",
+							type: "get",
+							data: "isbn=" + isbn,
+							datType: "text",
+							success: function (datos,estado,xhr) {
+								var libro = JSON.parse(datos);
+								for(campo=0;campo<=5;campo++) {
+									if($("tr").eq(fila+1).children().eq(campo).text()=="") {
+										switch(campo) {
+											case 0: $("tr").eq(fila+1).children().eq(campo).text(libro.isbn).wrapInner("<span>"); break;
+											case 1: $("tr").eq(fila+1).children().eq(campo).text(libro.titulo).wrapInner("<span>"); break;
+											case 2: $("tr").eq(fila+1).children().eq(campo).text(libro.autor).wrapInner("<span>"); break;
+											case 3: $("tr").eq(fila+1).children().eq(campo).text(libro.editorial).wrapInner("<span>"); break;
+											case 4: $("tr").eq(fila+1).children().eq(campo).text(libro.paginas).wrapInner("<span>"); break;
+											case 5: $("tr").eq(fila+1).children().eq(campo).text(libro.precio).wrapInner("<span>"); break;
+										}
+									}
+								}
+							},
+							error: function (xhr,estado,error) {alert(estado + " - " + error);}
+						});
 					});
 				});
 			});
