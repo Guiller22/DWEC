@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.5.1.js"></script>
+    <style>
+        table, tr, th, td {
+            border: 1px solid black;
+        }
+        th,td{
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Parte C. Recoger Datos</h1>
+    <hr>
+    <ul id="datosSocio"></ul>
+    <button id="btnInsertar" onclick="insertarBD()" disabled="true">Confirmar e Insertar en la Base de Datos</button><br><br>
+    <button onclick="mostrarDatos()">Ver Socios de la Base de Datos</button><br><br>
+    <table>
+        <tbody id="tablaSocios">
+
+        </tbody>
+    </table>
+    <br><br>
+    <button onclick="habilitarJquery()" id="btnJquery" disabled="true">Habilitar Jquery</button>
+    <script>
+        var idS,nombreS,direccionS,sexoS,premiumS;
+        window.addEventListener("storage",function(event){
+            var socioJSON = localStorage.getItem("socio");
+            var socio = JSON.parse(socioJSON);
+
+            var s = "";
+            s+= "<li>ID: "+socio.id+"</li>";
+            idS=socio.id;
+            s+= "<li>Nombre: "+socio.nombre+"</li>";
+            nombreS=socio.nombre;
+            s+= "<li>Dirección: "+socio.direccion+"</li>";
+            direccionS=socio.direccion;
+            s+= "<li>Sexo: "+socio.sexo+"</li>";
+            sexoS=socio.sexo;
+            if(socio.premium){
+                s+= "<li>Premium: Sí</li>";
+                premiumS="Si";
+            }else{
+                s+= "<li>ID: Premium: No</li>";
+                premiumS="No";
+            }
+            document.getElementById("datosSocio").innerHTML=s;
+            document.getElementById("btnInsertar").disabled=false;
+        });
+        var bd, almacenSocios, peticion;
+        function insertarBD(){
+            if(window.indexedDB){
+                peticion = window.indexedDB.open("examen");
+
+                peticion.onsuccess = function (evento){
+                    bd=peticion.result;
+                    var transaccion = bd.transaction(bd.objectStoreNames,"readwrite");
+
+                    almacenSocios = transaccion.objectStore("socios");
+                    almacenSocios.put({id:idS,nombre:nombreS,direccion:direccionS,sexo:sexoS,premium:premiumS});
+                    bd.close();
+                }
+            }else{
+                console.log("IndexedDB no está soportado");
+            }
+        }
+        function mostrarDatos(){
+            document.getElementById("btnJquery").disabled=false;
+            var cabecera="<tr><th>ID</th><th>Nombre</th><th>Direccion</th><th>Sexo</th><th>Premium</th></tr>";
+            document.getElementById("tablaSocios").innerHTML=cabecera;
+            if(window.indexedDB){
+                peticion = window.indexedDB.open("examen");
+
+                peticion.onsuccess=function(evento){
+                    bd=evento.target.result;
+                    var transaccion = bd.transaction(bd.objectStoreNames,"readwrite");
+                    almacenSocios = transaccion.objectStore("socios");
+
+                    var peticionGetAll = almacenSocios.getAll();
+
+                    peticionGetAll.onsuccess = function(){
+                        var valores = peticionGetAll.result;
+                        for(socio in valores){
+                            insertarElemento(valores[socio]);
+                        }
+                    }
+                }
+            }
+        }
+        function insertarElemento(socio){
+            var s = "<tr><td>"+socio.id+"</td><td>"+socio.nombre+"</td><td>"+socio.direccion+"</td><td>"+socio.sexo+"</td><td>"+socio.premium+"</td></tr>";
+            document.getElementById("tablaSocios").innerHTML+=s;
+        }
+        function habilitarJquery(){
+            $("th,td").click(function(){
+                $(this).css("backgroundColor","yellow");
+            });
+            $("tr>td:first").click(function(){
+                $(this).parent().remove();
+            });
+            $("th:first").dblclick(function(){
+                $("th,td").css("backgroundColor","white");
+            })
+
+        }
+    </script>
+</body>
+</html>

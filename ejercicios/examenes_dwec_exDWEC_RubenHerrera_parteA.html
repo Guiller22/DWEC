@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parte A</title>
+</head>
+<body>
+    <h1>Parte A. Crear Base de Datos</h1>
+    <hr>
+    <button onclick="crearDB()">Crear Base de Datos</button>
+    <script>
+        function crearDB(){		
+            var bd, almacenSocios, peticion;				
+            if (window.indexedDB) {
+                peticion = window.indexedDB.open("examen",4);
+                //ONSUCCESS
+                peticion.onsuccess =  function (evento) {			
+                    bd = peticion.result;
+                };
+                //ONERROR
+                peticion.onerror = function (evento) {
+                };
+                //ONUPGRADENEEDED
+                peticion.onupgradeneeded = function (evento) {
+                bd = peticion.result;
+                almacenSocios = bd.createObjectStore("socios", {keyPath:"id"});
+                };
+                //ONBLOCKED
+                peticion.onblocked = function (evento) {
+                };
+            
+            } else {
+                console.log("IndexedDB no está soportado");
+            }
+        }
+    </script>
+</body>
+</html>

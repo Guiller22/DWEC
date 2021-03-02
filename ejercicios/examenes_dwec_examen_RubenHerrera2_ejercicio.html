@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Examen Ruben Herrera Marcos-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicio examen</title>
+    <style>
+        .no{
+            border: 2px solid black;
+        }
+        .si{
+            border: 2px dotted red;
+        }
+        div{
+            padding: 1cm;
+            margin: 0.5cm;
+            width: 25%;
+        }
+        #obligatorio{
+            font-size: 20px;
+            color: red;
+        }
+        tbody{
+            display: none;
+        }
+        tbody,td,tr{
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Examen 2 - Rubén Herrera Marcos</h1>
+    <hr>
+    <span id="obligatorio" draggable="true" ondragstart="fase1(event);" ondragover="fase2(event);" ondrop="fase3(event);">OBLIGATORIO</span>
+    <div id="cuadrodni" draggable="true"  ondragstart="fase1(event);" ondragover="fase2(event);" ondrop="fase3(event);">
+        DNI <br>
+        <input type="text" id="dni">
+    </div>
+    <div id="cuadronombre" draggable="true"  ondragstart="fase1(event);" ondragover="fase2(event);" ondrop="fase3(event);">
+        Nombre <br>
+        <input type="text" id="nombre">
+    </div>
+    <div id="cuadrotelefono" draggable="true"  ondragstart="fase1(event);" ondragover="fase2(event);" ondrop="fase3(event);">
+        Teléfono <br>
+        <input type="text" id="telefono">
+    </div>
+    <button onclick="enviar();">Almacenar</button>
+    <br><br>
+    <table>
+        <tbody id="tabla">
+            <tr><td>DNI</td><td>Nombre</td><td>Telefono</td></tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        //Añado la clase "no" a todos los contenedores
+        var elementosDiv = document.getElementsByTagName("div");
+        for(i=0; i<elementosDiv.length;i++){
+            elementosDiv[i].className ="no";
+        }
+        //atributos required
+        var inputDni,inputNombre,inputTelefono;
+        inputDni=document.getElementById("dni").getAttribute("required");
+        inputNombre=document.getElementById("nombre").getAttribute("required");
+        inputTelefono=document.getElementById("telefono").getAttribute("required");
+
+        function enviar(){
+            //valores de los inputs
+            var vDni,vNombre,vTelefono;
+            vDni = document.getElementById("dni").value;
+            vNombre = document.getElementById("nombre").value;
+            vTelefono = document.getElementById("telefono").value;
+
+            //nodo tbody
+            var tabla = document.getElementById("tabla");
+            var filasTabla = document.getElementsByTagName("tr");
+
+            //Crear Fila
+            var fila = document.createElement("tr");
+            //Eliminar Fila al hacer doble Click
+            fila.addEventListener("dblclick", function(e){
+                var tbody = this.parentElement;
+                tbody.removeChild(this);
+            });
+            //Comprobar si un campo es obligatorio
+            if((vDni=="")&&(vNombre=="")&&(vTelefono=="")){
+                alert("Inserta como mínimo un campo");
+            }else if((inputDni=true)&&(vDni=="")){
+                alert("DNI Obligatorio");
+            }else if((inputNombre=true)&&(vNombre=="")){
+                alert("Nombre Obligatorio");
+            }else if((inputTelefono=true)&&(vTelefono=="")){
+                alert("Telefono Obligatorio");
+            }else{
+                tabla.style.display = "block";
+                tabla.appendChild(fila);
+                //td dni
+                var celdaDni = document.createElement("td");
+                var contenidoDni = document.createTextNode(vDni);
+                //td nombre
+                var celdaNombre = document.createElement("td");
+                var contenidoNombre = document.createTextNode(vNombre);
+                //td Telefono
+                var celdaTelefono = document.createElement("td");
+                var contenidoTelefono = document.createTextNode(vTelefono);
+
+                celdaDni.appendChild(contenidoDni);
+                celdaNombre.appendChild(contenidoNombre);
+                celdaTelefono.appendChild(contenidoTelefono);
+                fila.appendChild(celdaDni);
+                fila.appendChild(celdaNombre);
+                fila.appendChild(celdaTelefono); 
+            }
+        }
+        //Evento Campo obligatorio
+        var cont;
+        function fase1(pEvento){
+			pEvento.dataTransfer.setData("", pEvento.target.id);
+            if(pEvento.target.id!="obligatorio"){
+                pEvento.target.className="no";
+                cont.removeAttribute("required");
+            }
+		}
+        function fase2(pEvento){
+			pEvento.preventDefault();
+		}
+        function fase3(pEvento){
+            if(pEvento.target.id!="obligatorio"){
+                pEvento.target.className="si";
+                cont = pEvento.target.children[1];
+                cont.setAttribute("required",true);
+            }
+		}
+    </script>
+</body>
+</html>

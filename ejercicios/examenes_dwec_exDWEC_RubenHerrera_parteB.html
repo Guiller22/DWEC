@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Parte B. Formulario</h1>
+    <hr>
+
+    Identificador: <br>
+    <input type="number" name="id" id="id"><br><br>
+    Nombre: <br>
+    <input type="text" name="nombre" id="nombre"><br><br>
+    Dirección: <br>
+    <input type="text" name="direccion" id="direccion"><br><br>
+    Sexo: <br>
+    <input type="radio" name="sexo" id="masculino">Masculino <br><br>
+    <input type="radio" name="sexo" id="femenino">Femenino <br><br>
+    <input type="checkbox" name="premium" id="premium">Premium <br><br>
+    <button onclick="enviar()">Enviar</button><br><br>
+    <span id="accionDB"></span>
+    <script>
+        function enviar(){
+            var socio = {};
+            socio.id = document.getElementById("id").value;
+            socio.nombre = document.getElementById("nombre").value;
+            socio.direccion = document.getElementById("direccion").value;
+            if(document.getElementById("masculino").checked){
+                socio.sexo = "Masculino";
+            }else if(document.getElementById("femenino")){
+                socio.sexo="Femenino"
+            }
+            if(document.getElementById("premium").checked){
+                socio.premium=true;
+            }else{
+                socio.premium=false;
+            }
+            var socioJSON = JSON.stringify(socio);
+            localStorage.setItem("socio",socioJSON);
+        }
+        window.addEventListener("storage",function(event){
+            document.getElementById("accionDB").textContent=localStorage.getItem("accion");
+        });
+    </script>
+</body>
+</html>
