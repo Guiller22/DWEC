@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    Resultado
+    <div id="calculo"></div>
+    Multiplicar
+    <input type="radio" id="multiplicar" name="operador" onchange="operando();"><br>
+    Sumar
+    <input type="radio" id="suma" name="operador" onchange="operando();" checked><br>
+    <script>
+        function operando(){
+            if (document.getElementById("multiplicar").checked){
+                var op = "multiplicar";
+            }
+            if (document.getElementById("suma").checked){
+                var op = "suma";
+            }
+            switch (op){
+            case "multiplicar": multiplicar()
+            break;
+            case "suma": suma()
+            break;
+            }
+        }
+        window.addEventListener("storage", function () {
+            var numA = localStorage.getItem("valorA");
+            var numB = localStorage.getItem("valorB");
+            var numC = localStorage.getItem("valorC");
+            var resultado=0;
+        
+        
+            
+            
+            function suma(){
+            if (numA != null) {
+                resultado = parseInt(numA);
+            }
+            if (numB != null) {
+                resultado += parseInt(numB);
+            }
+
+            if (numC != null) {
+                resultado += parseInt(numC);
+            }
+            document.getElementById("calculo").innerHTML = resultado;
+        }
+        function multiplicar(){
+            if (numA != null) {
+                resultado = parseInt(numA);
+            }
+            if (numB != null) {
+                resultado = resultado * parseInt(numB);
+            }
+
+            if (numC != null) {
+                resultado = resultado * parseInt(numC);
+            }
+            document.getElementById("calculo").innerHTML = resultado;
+        }
+    });
+    </script>
+</body>
+
+</html>
