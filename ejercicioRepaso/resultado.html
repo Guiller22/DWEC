@@ -15,34 +15,21 @@
     Resultado
     <div id="calculo"></div>
     Multiplicar
-    <input type="radio" id="multiplicar" name="operador" onchange="operando();"><br>
+    <input type="radio" id="multiplicar" name="operador" onclick="suma();"><br>
     Sumar
-    <input type="radio" id="suma" name="operador" onchange="operando();" checked><br>
+    <input type="radio" id="suma" name="operador" onclick="multiplicar();" checked><br>
     <script>
-        function operando(){
-            if (document.getElementById("multiplicar").checked){
-                var op = "multiplicar";
-            }
-            if (document.getElementById("suma").checked){
-                var op = "suma";
-            }
-            switch (op){
-            case "multiplicar": multiplicar()
-            break;
-            case "suma": suma()
-            break;
-            }
-        }
-        window.addEventListener("storage", function () {
+        
+
+
+
+        function suma() {
+            window.addEventListener("storage", function () {
             var numA = localStorage.getItem("valorA");
             var numB = localStorage.getItem("valorB");
             var numC = localStorage.getItem("valorC");
-            var resultado=0;
+            var resultado = 0;
         
-        
-            
-            
-            function suma(){
             if (numA != null) {
                 resultado = parseInt(numA);
             }
@@ -54,8 +41,14 @@
                 resultado += parseInt(numC);
             }
             document.getElementById("calculo").innerHTML = resultado;
-        }
-        function multiplicar(){
+        
+        });
+        function multiplicar() {
+            window.addEventListener("storage", function () {
+            var numA = localStorage.getItem("valorA");
+            var numB = localStorage.getItem("valorB");
+            var numC = localStorage.getItem("valorC");
+            var resultado = 0;
             if (numA != null) {
                 resultado = parseInt(numA);
             }
@@ -67,8 +60,8 @@
                 resultado = resultado * parseInt(numC);
             }
             document.getElementById("calculo").innerHTML = resultado;
-        }
-    });
+        });
+    }
     </script>
 </body>
 
