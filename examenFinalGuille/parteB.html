@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parte b</title>
+    <style>
+        div{
+            border: 1px solid black;
+            width: 300px;
+        }
+        .incorrecto{
+            background-color: yellow;
+        }
+        .correcto{
+            background-color: white;
+        }
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Examen Final-Parte b</h1>
+    
+    <hr>
+    <span id="marcar" draggable="false" ondragstart="fase1(event);" ondragover="fase2(event);" ondrop="fase3(event);">X</span>
+
+    <div id="bdni" class="correcto" ondragover="fase2(event);" ondrop="fase3(event);">DNI:</div>
+
+    <div id="bnombre" class="correcto" ondragover="fase2(event);" ondrop="fase3(event);">NOMBRE:</div>
+
+    <div id="btelefono" class="correcto" ondragover="fase2(event);" ondrop="fase3(event);">TELEFONO:</div>
+
+    <div id="bmatricula" class="correcto" ondragover="fase2(event);" ondrop="fase3(event);">MATRICULA:</div>
+    <br>
+    <input type="radio" name="validacion" value="automatica" id="vautomatica" />Automatica<br />
+    <input type="radio" name="validacion" value="manual" id="vmanual" checked/>Manual<br />
+    <br />
+    <button id="validar" onclick="validar();">Validar</button>
+
+    <script type="text/javascript">
+    window.addEventListener("storage", function (event) {
+            var datosJSON = localStorage.getItem("datos");
+            var dato = JSON.parse(datosJSON);
+
+            var datoDni = "DNI:<span id=dni>"+dato.dni+"</span>";
+            document.getElementById("bdni").innerHTML = datoDni;
+            var datoNombre = "NOMBRE:<span id=nombre>"+dato.nombre+"</span>";
+            document.getElementById("bnombre").innerHTML = datoNombre;
+            var datoTelefono = "TELEFONO:<span id=telefono>"+dato.telefono+"</span>";
+            document.getElementById("btelefono").innerHTML = datoTelefono;
+            var datoMatricula = "MATRICULA:<span id=matricula>"+dato.matricula+"</span>";
+            document.getElementById("bmatricula").innerHTML = datoMatricula;
+        
+        });
+        if (document.getElementById("vmanual").checked){
+            document.getElementById("marcar").setAttribute("draggable",true);
+            document.getElementById("bdni").className="correcto";
+                document.getElementById("bmatricula").className="correcto";
+                document.getElementById("bnombre").className="correcto";
+                document.getElementById("btelefono").className="correcto";
+        }
+        if (document.getElementById("vautomatica").checked){
+                document.getElementById("bdni").className="correcto";
+                document.getElementById("bmatricula").className="correcto";
+                document.getElementById("bnombre").className="correcto";
+                document.getElementById("btelefono").className="correcto";
+                pasaTest(/^[A-Z]{1}[a-z]+|[A-Z]{1}[a-z]+\s[A-Z]{1}[a-z]+$/,"dni");
+				pasaTest(/^[a-zA-Z\s]+$/,"nombre");
+				pasaTest(/^\d{8}[a-zA-Z]$/,"telefono");
+				pasaTest(/^[0-9]{4}[B-DF-HJ-NP-TV-Z]{3}$/,"matricula");
+        }
+        function pasaTest(expresion,campo) {
+				var dato = document.getElementById(campo).value;
+                console.log(dato);
+				if(!expresion.test(dato)) {
+					error += "\u25cf\u0020Error en el campo " + campo + "\n";
+					document.getElementById(campo).className="incorrecto";
+				} else {
+					document.getElementById(campo).className="correcto";
+					document.getElementById(campo).disabled = true;
+				}
+			}
+            if (document.getElementById("vmanual").checked){
+                
+        }
+    function validar(){
+        var datosform = {};
+        
+        
+			datosform.dni = document.getElementById("dni").value;
+
+            if (document.getElementById("bdni").className!="incorrecto"){
+                datosform.estadodni = "correcto";
+            }else{
+                datosform.estadodni = "incorrecto";
+            }
+
+			datosform.nombre = document.getElementById("nombre").value;
+
+            if (document.getElementById("bnombre").className!="incorrecto"){
+                datosform.estadonombre = "correcto";
+            }else{
+                datosform.estadonombre = "incorrecto";
+            }
+
+			datosform.telefono = document.getElementById("telefono").value;
+
+            if (document.getElementById("btelefono").className!="incorrecto"){
+                datosform.estadotelefono = "correcto";
+            }else{
+                datosform.estadotelefono = "incorrecto";
+            }
+
+            datosform.matricula = document.getElementById("matricula").value;
+            
+            if (document.getElementById("bmatricula").className!="incorrecto"){
+                datosform.estadomatricula = "correcto";
+            }else{
+                datosform.estadomatricula = "incorrecto";
+            }
+
+			var datosparseados = JSON.stringify(datosform);
+			localStorage.setItem("datosVuelta", datosparseados);
+    }
+    function fase1(pEvento){
+			pEvento.dataTransfer.setData("", pEvento.target.id);
+            
+		}
+        function fase2(pEvento){
+			pEvento.preventDefault();
+		}
+        function fase3(pEvento){
+            if(pEvento.target.id!="correcto"){
+                pEvento.target.className="incorrecto";
+            }
+        }
+        
+        
+
+        
+        
+    </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 	$servername = "localhost";
 	$dbName = "dwec_biblioteca";
 	$username = "root";
-	$password = "root";
+	$password = "toor";
 
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=$dbName;charset=utf8", $username, $password);

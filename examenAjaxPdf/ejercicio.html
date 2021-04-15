@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Precio Mínimo<br>
+    <input type="number" id="preciomin" required="required" /><br /><br />
+
+    Precio Máximo<br>
+    <input type="number" id="preciomax" required="required" /><br /><br />
+
+
+    <button onclick="mostrar()">Procesar libros</button>
+    <div id="contenido"></div>
+    <hr>
+    <hr>
+    <button onclick="crearlo()" id="crearPDF">Crear PDF</button>
+    <button onclick="eliminarlo()" id="eliminar">Eliminar libro</button>
+    <script>
+        document.getElementById("eliminar").disabled = true;
+        document.getElementById("crearPDF").disabled = true;
+        function mostrar() {
+            var peticion;
+
+            if (window.XMLHttpRequest) {
+                peticion = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                peticion = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+
+            var vPrecioMin = document.getElementById("preciomin").value;
+            var vPrecioMax = document.getElementById("preciomax").value;
+            peticion.open('GET', 'examen1.php?preciomin=' + vPrecioMin + '&preciomax=' + vPrecioMax, true);
+            peticion.send(null);
+
+
+            peticion.onreadystatechange = function (evento) {
+                if ((peticion.readyState == 4) && ((peticion.status == 200))) {
+
+                    var libros = JSON.parse(peticion.responseText);
+                    procesarDatos(libros);
+                }
+            }
+        }
+    
+        function procesarDatos(_libros) {
+            var cadenaHTML = "";
+
+            _libros.forEach(function (_elemento) {
+                if (_elemento.hasOwnProperty("titulo"))
+                    var inputRadio = document.createElement("INPUT");
+                inputRadio.setAttribute("id", _elemento.ISBN);
+                inputRadio.setAttribute("name", "boton");
+                inputRadio.setAttribute("type", "radio");
+                /*cadenaHTML.appendChild(inputRadio);*/
+                cadenaHTML += _elemento.titulo + "<br />";
+                cadenaHTML.innerHTML +=inputRadio;
+            });
+
+            document.getElementById("contenido").innerHTML = cadenaHTML;
+            document.getElementById("crearPDF").disabled = false;
+            document.getElementById("eliminar").disabled = false;
+        }
+        
+
+        
+        
+        /*function crearPDF() {
+
+            pdf = new jsPDF();
+            var botonRadio = document.getElementById("boton");
+            if (botonRadio.checked) {
+                botonRadio.getAttribute
+            }
+
+
+            var es_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+            if (es_chrome) {
+                var win = window.open();
+                win.document.write('<iframe src="' + pdf.output('datauri') +
+                    '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>'
+                    );
+            }
+
+            var es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+            if (es_firefox) {
+                pdf.output('datauri');
+            }
+        }*/
+    </script>
+</body>
+
+</html>

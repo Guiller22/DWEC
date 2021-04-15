@@ -16,7 +16,13 @@ persona1.nombreyedad = function () {
 //MÉTODO 1 --> for..in
 console.log("MÉTODO 1  --> for..in");
 for(let x in persona1) {
-    console.log(x + " - " + persona1[x]);
+    
+    if(x!="nombreyedad"){
+        console.log(x + " - " + persona1[x]);
+    }else{
+        console.log(persona1[x]());
+        console.log(persona1.nombreyedad());
+    }
 }
 
 

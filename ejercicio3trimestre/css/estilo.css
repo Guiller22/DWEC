@@ -1,0 +1,16 @@
+td{
+    border: 2px solid black;
+    width: 40%;
+    height: 40%;
+    text-align: center;
+}
+span{
+    display: block;
+}
+div{
+    padding: 5px;
+}
+table{
+    padding: 0.5cm;
+    border: 2px solid green;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Index db crear</title>
+</head>
+
+<body>
+    <h1>Examen Parte A - Crear IndexedDB</h1>
+    <hr />
+    <button onclick="crearBD();">Crear tabla</button>
+
+    <script type="text/javascript">
+        function crearBD() {
+            var peticion, bd, almacen;
+
+            if (window.indexedDB) {
+                peticion = window.indexedDB.open("examenfinal", 1);
+
+                peticion.onsuccess = function (evento) {
+                    console.log("EVENTO: success\nSe ha abierto correctamente la base de datos: " + peticion.result.name + " con versión " + peticion.result.version);
+
+                    bd = peticion.result;
+                    var transaccion = bd.transaction(bd.objectStoreNames, "readwrite");
+
+                    almacen = transaccion.objectStore("datos");
+                };
+
+                peticion.onerror = function (evento) {
+                    alert("No se ha creado la base de datos: " + event.target.errorCode);
+                };
+
+                peticion.onupgradeneeded = function (evento) {
+                    console.log("EVENTO: upgradedneeded\nSe modifica la versión o es nueva");
+
+                    bd = peticion.result;
+                    almacen = bd.createObjectStore("datos", { keyPath: "identificador" });
+                };
+            } else {
+                console.log("IndexedDB no está soportado");
+            }
+        }
+
+    </script>
+</body>
+
+</html>

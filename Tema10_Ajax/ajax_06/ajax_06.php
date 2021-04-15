@@ -1,11 +1,10 @@
 <?php
 	$servername = "localhost";
-	$dbName = "interfaces";
-	$username = "profesor";
-	$password = "profesor";
+	$dbName = "dwec_biblioteca";
+	$username = "root";
+	$password = "toor";
 
 	try {
-		mysql_set_charset('utf8');
 		$conn = new PDO("mysql:host=$servername;dbname=$dbName;charset=utf8", $username, $password);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

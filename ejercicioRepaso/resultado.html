@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    Resultado
+    <div id="calculo"></div>
+    Multiplicar
+    <input type="radio" id="multiplicar" name="operador" onclick="suma();"><br>
+    Sumar
+    <input type="radio" id="suma" name="operador" onclick="multiplicar();" checked><br>
+    <script>
+        
+
+
+
+        function suma() {
+            window.addEventListener("storage", function () {
+            var numA = localStorage.getItem("valorA");
+            var numB = localStorage.getItem("valorB");
+            var numC = localStorage.getItem("valorC");
+            var resultado = 0;
+        
+            if (numA != null) {
+                resultado = parseInt(numA);
+            }
+            if (numB != null) {
+                resultado += parseInt(numB);
+            }
+
+            if (numC != null) {
+                resultado += parseInt(numC);
+            }
+            document.getElementById("calculo").innerHTML = resultado;
+        
+        });
+        function multiplicar() {
+            window.addEventListener("storage", function () {
+            var numA = localStorage.getItem("valorA");
+            var numB = localStorage.getItem("valorB");
+            var numC = localStorage.getItem("valorC");
+            var resultado = 0;
+            if (numA != null) {
+                resultado = parseInt(numA);
+            }
+            if (numB != null) {
+                resultado = resultado * parseInt(numB);
+            }
+
+            if (numC != null) {
+                resultado = resultado * parseInt(numC);
+            }
+            document.getElementById("calculo").innerHTML = resultado;
+        });
+        }
+    }
+    </script>
+</body>
+
+</html>
