@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="funciones.js"></script>
+		<title>Trimestre3 - Ejemplo 1 Resultados</title>
+	</head>
+	<body>
+		<h1>Trimestre3 - Ejemplo 1 Resultados</h1>
+		<hr />
+
+		Resultado<br />
+		<span id="resultado" style="font-size: 1cm;"></span>
+		
+		<script type="text/javascript">
+			window.addEventListener("storage",function () {
+				var varA = localStorage.getItem("operandoA");
+				var varB = localStorage.getItem("operandoB");
+				var varC = localStorage.getItem("operandoC");
+				var suma = 0;
+
+				if(varA!=null) {
+					suma += parseInt(varA);
+				}
+
+				if(varB!=null) {
+					suma += parseInt(varB);
+				}
+
+				if(varC!=null) {
+					suma += parseInt(varC);
+				}
+
+				document.getElementById("resultado").innerText = suma;
+			});
+		</script>
+	</body>
+</html>
