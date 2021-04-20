@@ -1,0 +1,15 @@
+#contenido {
+    border: 3px solid red;
+}
+
+.cabecera {
+    background-color: blue;
+}
+
+#caja1 {
+    border: 2px solid red;
+}
+
+#caja2 {
+    border: 2px solid blue;
+}
