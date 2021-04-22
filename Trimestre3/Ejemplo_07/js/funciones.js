@@ -1,7 +1,7 @@
 document.getElementById("procesar").addEventListener("click",function () {
  
     var listadoJSON = '{"elementos":[\
-        {"etiqueta":"img","atributos":{"src":"/recursos/imagen2.png","alt":"Es la imagen 1"},"contenido":""},\
+        {"etiqueta":"img","atributos":{"src":"recursos/imagen2.png","alt":"Es la imagen 1"},"contenido":""},\
         {"etiqueta":"h3","atributos":{"class":"cabecera"},"contenido":"Esto es una cabecera H3"},\
         {"etiqueta":"input","atributos":{"type":"text","value":"nombre"},"contenido":""},\
         {"etiqueta":"hr","atributos":{"style":"width: 50%"},"contenido":""}\
