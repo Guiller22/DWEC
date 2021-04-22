@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Ejemplo_03 en el title</title>
+	</head>
+	<body>
+		<h1>primero</h1>
+		<h1>dsgsdfsdfsdfsdfsdfds</h1>
+		<hr />
+
+		<div id="formulario">
+			<div>
+				<span id="nombreTitulo">NOMBRE</span>
+			</div>
+	
+			<div>
+				<span id="apellidosTitulo">APELLIDOS</span>
+			</div>
+	
+			<div>
+				<span id="edadTitulo">AÑOS</span>
+			</div>
+	
+			<div>
+				<span id="paisTitulo">PAIS</span>
+			</div>
+
+			<div>
+				<button id="boton1" onclick="cambiarTexto()">Operar</button>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+
+			function cambiarTexto() {
+
+				var elementos = document.body.getElementsByTagName("*");
+				var textoNuevo = "";
+
+				for(i=0;i<elementos.length;i++) {
+					if(elementos[i].getElementsByTagName("*").length==0) {
+						if(elementos[i].textContent.length>0 && elementos[i].tagName!="SCRIPT") {
+							textoNuevo = elementos[i].textContent;
+							break;
+						}
+					}
+				}
+
+				for(i=0;i<elementos.length;i++) {
+					if(elementos[i].getElementsByTagName("*").length==0) {
+						if(elementos[i].textContent.length>0 && elementos[i].tagName!="SCRIPT") {
+							elementos[i].textContent = textoNuevo;
+						}
+					}
+				}
+
+			}
+			
+		</script>
+
+	</body>
+</html>

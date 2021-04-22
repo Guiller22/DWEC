@@ -1,0 +1,20 @@
+#contenido {
+    border: 3px solid red;
+}
+
+.cabecera {
+    background-color: blue;
+}
+
+#caja1 {
+    border: 4px solid red;
+}
+
+#caja2 {
+    border: 4px solid blue;
+}
+
+div {
+    padding: 1.5cm;
+    margin: 1.5cm;
+}
