@@ -2,6 +2,8 @@ var turno = 0;
 window.addEventListener("storage",function (){
 document.getElementById("comprobarNum1").addEventListener("click", function () {
     var numero = window.localStorage.getItem("clave");
+    console.log(numero);
+    parseInt(numero);
     var numeroA = document.getElementById("numeroProbarA");
     parseInt(numeroA);
     if(localStorage.getItem("turno")==0) {
