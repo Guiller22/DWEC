@@ -1,6 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--	public static void main(String[] args) {
 
+		String s="hola putilla";
+
+		repit h= new repit();
+
+		int[] nuevo=h.moreRepeatedChar(s);
+
+		System.out.println(nuevo[0]);
+
+		System.out.println(nuevo[1]);
+
+ 
+
+	}
+
+ 
+
+	  public int[] moreRepeatedChar(String s) {
+
+ 
+
+		    System.out.println("EN ESTE METODO USO UN ARRAY PARA EL ALGORITMO");
+
+ 
+
+		    int []array=new int[2];
+
+		    int []arrayCuenta=new int[s.length()];
+
+		    char c1;
+
+		    char c2;
+
+		    int max=0;
+
+		    int cuenta=1;
+
+		    //rellono un array con la cuenta de aparcicion de todos los caracteres
+
+		    for(int i=0;i<s.length()-1;i++){
+
+		      cuenta=1;
+
+		      for(int j=i+1;j<s.length();j++){
+
+		        c1=s.charAt(i);
+
+		        c2=s.charAt(j);
+
+		        if(c1==c2){
+
+		          ++cuenta;
+
+ 
+
+		        }
+
+		        arrayCuenta[i]=cuenta;
+
+		      }
+
+ 
+
+ 
+
+		    }
+
+		    //determino en que celda(la posicion) esta el caracter mas repetido
+
+		    for(int i=0;i<arrayCuenta.length-1;i++){
+
+		      if(arrayCuenta[max]<arrayCuenta[i+1]){
+
+		        max=i+1;
+
+		      }
+
+		    }
+
+ 
+
+		    //relleno al array a retornar con el codigo ascii del caracter mas repetido
+
+		    //y las veces que se repite
+
+		    int maximo =arrayCuenta[max];
+
+		    array[0]=(int)s.charAt(max);
+
+		    array[1]=maximo;
+
+ 
+
+		    return array;
+
+		  }
+
+}-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
