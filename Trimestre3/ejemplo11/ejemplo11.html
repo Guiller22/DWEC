@@ -1,0 +1,35 @@
+<!--formulario de entrada nombre edad telefono curso select para elegir entre 1y2
+código postal un email tendremos un boton y una pagina distinta apareceran estos campos
+con checkbox tendremos otro boton en esta pagina que no estara activo hasta que se pase informacion , que recibe los
+datos de la anterior
+se marcara segun su criterio le da al boton y pasa la informacion al a en a lo que este bien
+se deshabilita los que ha puesto mal siguen activos para cambiar
+!-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" defer src="js/funciones.js"></script>
+</head>
+
+<body>
+    Nombre: <input type="text" id="nombre" /><br />
+    Edad: <input type="number" id="edad" /><br />
+    Telefono: <input type="number" id="telefono" /><br />
+    Curso<br />
+    <select name="cursoActual" id="cursos">
+        <optgroup label="curso">
+            <option value="primero">1</option>
+            <option value="segundo">2</option>
+        </optgroup>
+    </select>
+    Codigo postal: <input type="number" id="cp" /><br />
+    Email: <input type="text" id="email" /><br />
+    <button id="enviar">Enviar</button>
+</body>
+
+</html>
