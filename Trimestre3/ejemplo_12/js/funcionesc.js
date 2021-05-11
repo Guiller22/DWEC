@@ -4,7 +4,7 @@ window.addEventListener("storage", function () {
     var operador = localStorage.getItem("operando");
     var resultado = 0;
     if (operador == "sum") {
-        resultado = numer1+numer2;
+        resultado = parseInt(numer1)+parseInt(numer2);
     } else {
         if (operador == "res") {
             resultado = numer1 - numer2;
