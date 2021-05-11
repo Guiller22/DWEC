@@ -1,0 +1,13 @@
+input,span {
+    display:block;
+}
+
+#numero {
+    display:block;
+    font-size: 2cm;
+}
+
+span {
+    color: red;
+    font-size: 1cm;
+}

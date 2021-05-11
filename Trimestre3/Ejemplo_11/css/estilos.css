@@ -1,0 +1,13 @@
+input[type=text],select,label {
+    display:block;
+    margin: 0.5cm;
+}
+
+datos {
+    border: 2px solid red;
+}
+
+span {
+    color:blue;
+    font-weight: bolder;
+}
