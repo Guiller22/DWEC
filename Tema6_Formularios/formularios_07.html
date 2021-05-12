@@ -31,6 +31,50 @@
 	{"value":"pt","texto":"Portuguesa"},\
 	{"value":"uk","texto":"Británica"}]}\
     ]}';
+	/* Pasar de html a json
+	function filtro(clave, valor) {
+		if (valor == '' || clave == null) {
+        return undefined;
+    } else {
+        return valor;
+    }
+};
+
+function serializeSchema(form) {
+  return [].map.call(form.getElementsByTagName("*"), function (el) {
+    switch(el.tagName) {
+      case 'INPUT':
+        return {
+          tag: el.tagName,
+          type: el.type,
+          name: el.name,
+          value: el.value,
+          placeholder: el.placeholder,
+          size: el.size,
+          maxlength: el.maxlength,
+          min: el.min,
+          max: el.max,
+          step: el.step
+        };
+      case 'DIV':
+      case 'ARTICLE':
+        //Estas etiquetas las ignoramos 
+        return undefined;
+        break;
+      default:
+         //Del resto de etiquetas sólo obtenemos su contenido de texto 
+        return {
+          tag: el.tagName,
+          text: el.innerText
+        };
+    }
+  }).filter(function (e) { return e !== undefined; });
+};
+*/
+
+var form = document.querySelector('#conv');
+schema = serializeSchema(form);
+console.log(JSON.stringify(schema, filtro, 2));
 
 			function crearFormulario() {
 
