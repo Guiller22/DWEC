@@ -1,15 +1,11 @@
 var numero=0;
-var turno,inicio,ganador;
+var turno,ganador;
 
 window.addEventListener("storage",function() {
 	numero = localStorage.getItem("numero");
 	turno = localStorage.getItem("turno");
-	inicio = localStorage.getItem("inicio");
 	ganador = localStorage.getItem("ganador");
 	document.getElementById("turnoB").innerText = turno;
-	if(inicio=="si") {
-		localStorage.removeItem("inicio");
-	}
 	if(ganador=="B") {
 		document.getElementById("resultadoA").innerText = "Has ganado";
 	}

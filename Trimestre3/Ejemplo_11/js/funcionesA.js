@@ -19,5 +19,4 @@ window.addEventListener("storage",function () {
 	document.getElementById("cp").disabled = correccion.cp;
 	document.getElementById("email").disabled = correccion.email;
 
-	document.getElementById("corregir").disabled = false;
 });
