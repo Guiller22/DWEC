@@ -1,0 +1,18 @@
+input[type=text],select,label {
+    display:block;
+    margin: 0.5cm;
+}
+
+div {
+    border: 2px solid black;
+    padding: 0.2cm;
+    margin: 1cm;
+}
+#respuestaProfesor{
+    color: green;
+    font-weight: bold;
+}
+#preguntaAlumno{
+    color: green;
+    font-weight: bold;
+}
