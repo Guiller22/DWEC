@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Planetas</title>
+  <title>Asteroides</title>
 
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/the-big-picture.css" rel="stylesheet">
@@ -16,34 +16,40 @@
 
 </head>
 <style>
-  input[type=text], input[type=number], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-family: 'Verdana', sans-serif;
-  font-weight: 800;
-  font-size: 20px;
-  color: rgb(56, 61, 61);
-}
+  img {
+    width: 80%;
+  }
+  input[type=text],
+  input[type=number],
+  input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Verdana', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: rgb(56, 61, 61);
+  }
 
 
 
-select {
-  width: 100%;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-family: 'Verdana', sans-serif;
-  font-weight: 800;
-  color:rgb(71, 80, 80);
-}
+  select {
+    width: 100%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Verdana', sans-serif;
+    font-weight: 800;
+    color: rgb(71, 80, 80);
+  }
 </style>
+
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
@@ -103,6 +109,9 @@ select {
         </div>
       </div>
     </div>
+    <div id="lista">
+    </div>
+    </div>
   </section>
   </section>
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -112,10 +121,45 @@ select {
       crearIndicesBD();
     });
   </script>
+  <script>
+    $(document).ready(function () {
+      $(".imagenSecundaria").on("error", function () {
+        $(this).attr('src', 'img/default.png');
+        //$(this).attr('width', '1000');
+      });
+    });
+  </script>
 
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function iniciar() {
 
+      origen1 = document.getElementById('nombre');
+      origen1.addEventListener('dragstart', arrastrado, false);
+      destino = document.getElementById('lista');
+      destino.addEventListener('dragenter', function (e) {
+        e.preventDefault();
+      }, false);
+      destino.addEventListener('dragover', function (e) {
+        e.preventDefault();
+      }, false);
+      destino.addEventListener('drop', soltado, false);
+    }
+
+    function arrastrado(e) {
+      let error = "default";
+      var codigo = '<img src="img/' + origen1.value + '.png" class = imagenSecundaria onerror="this.onerror=null; this.src=\'img/default.png\'">';
+      e.dataTransfer.setData('Text', codigo);
+    }
+
+    function soltado(e) {
+      e.preventDefault();
+      destino.innerHTML = e.dataTransfer.getData('Text');
+    }
+    window.addEventListener('load', iniciar, false);
+
+  </script>
 </body>
 
 </html>
