@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Examen2 - Preguntas de una en una</title>
+		<link rel="icon" type="image/x-icon" href="/recursos/favicon.ico">
+		<link rel="stylesheet" href="css/estilos.css">
+		<script type="text/javascript" defer src="/js/profesor.js"></script>
+	</head>
+	<body>
+		<h1>Examen2 - Preguntas de una en una</h1>
+		<H2>PROFESOR</H2>
+		<hr />
+
+		<div id="cuadroPregunta">
+			<p>Pregunta:</p>
+			<input id="preguntaProfesor" type="text" size="40" />
+			<button id="botonPreguntar">Preguntar</button>
+			
+		</div>
+
+		<div id="cuadroCorrecion">
+			<p>Respuesta: <span id="respuestaProfesor"></span></p>
+			<input type="radio" name="correccion" id="bien" />Bien
+			<input type="radio" name="correccion" id="mal" />Mal
+			<button id="botonCorregir">Corregir</button>
+		</div>
+
+		<div id="cuadroResultados">
+			<button id="botonFinalizar">Finalizar</button>
+		</div>
+	</body>
+</html>
