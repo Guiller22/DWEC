@@ -126,3 +126,10 @@ function codigo() {
 }
 
 window.onload = codigo;
+$(function (){
+	
+
+
+	
+	$("*").css("fontFamily","arial");				
+});
