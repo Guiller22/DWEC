@@ -72,7 +72,7 @@
                 var nombre = document.getElementById("fname");
                 d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
                 var caduca = "expires=" + d.toUTCString();
-                document.cookie = "nombre=" + name + ";" + caduca;
+                document.cookie = "usuario=" + name + ";" + caduca;
                 alert("Hola\n" + document.cookie + "");
             }
         }

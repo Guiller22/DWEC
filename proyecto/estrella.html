@@ -19,7 +19,7 @@
 
   .formulario .botonDescargar {
     width: 30%;
-    
+
   }
 </style>
 
@@ -68,7 +68,8 @@
   <div class="formulario">
     <form>
       <h1>Registro para apadrinar tu estrella</h1>
-
+      <label id="usuario" for="usuario">Usuario</label>
+      <input class="formRegist" type="text" id="usuario" name="usuario" placeholder="Usuario..">
       <label for="nombre">Nombre</label>
       <input type="text" id="fname" name="nombre" pattern="[a-z]{1,15}" placeholder="Nombre..">
 
@@ -93,7 +94,8 @@
       </select>
 
       <label for="correo">E-mail</label>
-      <input type="text" id="correo" name="correo" placeholder="Email.." pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+      <input type="text" id="correo" name="correo" placeholder="Email.."
+        pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
 
       Recordar
       <input type="checkbox" id="recordar" name="recordar">
@@ -113,6 +115,62 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="scripts/crearAlmacenes.js"></script>
   <script>
+    function leerCookie(clave) {
+				var resultado = "";
+				var busqueda = clave + "=";
+		
+				var listCookies = document.cookie.split(';');
+				var par = "";
+		
+				for(var i = 0; i <listCookies.length; i++) {
+					par = listCookies[i]; //Cada elemento del array de cookies: nombre de la cookie y carácter =
+		
+					//Se quitan los espacios en blanco 
+					while (par.charAt(0)==' ') {
+						par = par.substring(1);
+					}
+		
+					//Se compara los que buscamos con el elemento del array. Si devuelve como índice 0 se ha encontrado
+					if (par.indexOf(busqueda) == 0) {
+						resultado = par.substring(busqueda.length,par.length);
+					}
+				}
+				return resultado;
+			}
+	
+		
+			function iniciarCampo() {
+				var cookieUsuario = leerCookie("usuario");
+				if(cookieUsuario!="") {
+					document.getElementById("usuario").value = cookieUsuario;
+				} else {
+					document.getElementById("usuario").value = "";
+				}
+			}
+	
+	
+			function login() {
+				var u = document.getElementById("usuario").value;
+        var resultado = "";
+				var busqueda = u + "=";
+		
+				var listCookies = document.cookie.split(';');
+				var par = "";
+		
+				for(var i = 0; i <listCookies.length; i++) {
+					par = listCookies[i]; //Cada elemento del array de cookies: nombre de la cookie y carácter =
+		
+					//Se quitan los espacios en blanco 
+					while (par.charAt(0)==' ') {
+						par = par.substring(1);
+					}
+		
+					//Se compara los que buscamos con el elemento del array. Si devuelve como índice 0 se ha encontrado
+					if (par.indexOf(busqueda) == 0) {
+						resultado = par.substring(busqueda.length,par.length);
+					}
+				}
+				
 
     function notificacion() {
       var nombre = document.getElementById("fname").value;
@@ -120,22 +178,31 @@
       var doc = new jsPDF();
 
 
-      doc.setFontSize(40);
+      /*doc.setFontSize(40);
       doc.text(20, 20, "CERTIFICADO ESTRELLA");
       doc.setFontSize(16);
       doc.text(20, 30, "Enhorabuena en tu nueva estrella " + nombre + " " + poseedorAp + ".");
-
+      */
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(255,0,0);
+      doc.text(20, 20, "CERTIFICADO ESTRELLA");
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(0,0,0);
+      doc.text(20, 30, "Enhorabuena en tu nueva estrella " + nombre + " " + poseedorAp + ".");
+      
       doc.addImage(imgData, 'JPEG', 10, 40, 180, 180);
       doc.save('CertificadoEstrella.pdf');
+
       if (document.getElementById("recordar").checked) {
         var name = document.getElementById("fname").value;
         var apell = document.getElementById("apellido").value;
-				window.localStorage.setItem(name,apell);
-				localStorage.setItem(name,apell);
-        window.sessionStorage.setItem(name,apell);
-				sessionStorage.setItem(name,apell);
+        window.localStorage.setItem(name, apell);
+        localStorage.setItem(name, apell);
+        window.sessionStorage.setItem(name, apell);
+        sessionStorage.setItem(name, apell);
       }
     }
+  }
   </script>
 </body>
 
