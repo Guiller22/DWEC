@@ -17,10 +17,6 @@
 
 </head>
 <style>
-  img {
-    width: 80%;
-  }
-
   select {
     width: 100%;
     margin: 8px 0;
@@ -32,6 +28,11 @@
     font-weight: 800;
     color: rgb(71, 80, 80);
   }
+  img {
+    width: 80%;
+  }
+
+
 </style>
 
 <body>
@@ -58,13 +59,14 @@
         </ul>
       </div>
     </div>
+    
   </nav>
   <section>
 
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
-          <h1 class="mt-5">Planetas</h1>
+          <h1 class="mt-5">Asteroides</h1>
           <a id="botonCargar" class="button1">Cargar</a>
           <a id="botonInsertar" class="button1">Añadir</a>
           <a id="botonModificar" class="button1">Modificar</a>
@@ -72,25 +74,25 @@
         </div>
       </div>
       <div id="cuadroIzquierda">
-        <select id="listaPlanetas" size="12"></select>
+        <select id="listaAsteroides" size="12"></select>
       </div>
-
+      
       <div id="cuadroDerecha">
         <div>
           <span>Id</span>
-          <input type="text" id="id">
+          <input type="text" id="id" class="formPlanetas">
         </div>
         <div>
           <span>Nombre</span>
-          <input type="text" id="nombre">
+          <input type="text" id="nombre" draggable="true" class="formPlanetas">
         </div>
         <div>
           <span>Dimensiones</span>
-          <input type="text" id="dimensiones">
+          <input type="text" id="dimensiones" class="formPlanetas">
         </div>
         <div>
           <span>Año descubrimiento</span>
-          <input type="text" id="anyo">
+          <input type="text" id="anyo" class="formPlanetas">
         </div>
       </div>
     </div>

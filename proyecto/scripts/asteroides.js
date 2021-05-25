@@ -21,7 +21,7 @@ function codigo() {
 					if(cursor) {
 						insertarElementoControlLista(cursor.value);
 
-						cursor.continue(); //continue incrementa el cursor una posición
+						cursor.continue();
 					} else {
 						console.log("FIN");
 					}
@@ -31,7 +31,6 @@ function codigo() {
 				document.getElementById("dimensiones").value = "";
 				document.getElementById("anyo").value = "";
 
-				//bd.close();
 			};
 
 
@@ -78,7 +77,7 @@ function codigo() {
 	}
 
 
-	/*****INSERTAR ********************************************/
+	//Insertar
 	document.getElementById("botonInsertar").onclick = function () {
 		var transaccionInsertar = bd.transaction(bd.objectStoreNames,"readwrite");
 		var almacenInsertar = transaccionInsertar.objectStore("Asteroides");
@@ -93,7 +92,7 @@ function codigo() {
 		almacenInsertar.add(nuevoAsteroide);
 		refrescarListas();
 	}
-
+	//Modificar
 
 	document.getElementById("botonModificar").onclick = function () {
 		var transaccionModificar = bd.transaction(bd.objectStoreNames,"readwrite");
@@ -108,9 +107,7 @@ function codigo() {
 		refrescarListas();
 	}
 
-	/***************************************************************
-	 * ELIMINAR ****************************************************
-	 **************************************************************/
+	//Eliminar
 	document.getElementById("botonEliminar").onclick = function () {
 		var transaccionEliminar = bd.transaction(bd.objectStoreNames,"readwrite");
 		var almacenEliminar = transaccionEliminar.objectStore("Asteroides");
@@ -127,9 +124,5 @@ function codigo() {
 
 window.onload = codigo;
 $(function (){
-	
-
-
-	
 	$("*").css("fontFamily","arial");				
 });
