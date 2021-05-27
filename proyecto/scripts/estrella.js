@@ -3,7 +3,7 @@ $(document).ready(function () {
         width: '30%'
     })
     $("#enviar").click(function () {
-        var nombre = $('input[name=nombre]').val();
+        var nombre = $('input[name=usuario]').val();
         var poseedorAp = $('input[name=apellido]').val();
         var doc = new jsPDF();
         const value = `; ${document.cookie}`;
