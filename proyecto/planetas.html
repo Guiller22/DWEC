@@ -2,37 +2,14 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <title>Planetas</title>
-
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/the-big-picture.css" rel="stylesheet">
   <script src="scripts/jquery-3.5.1.js"></script>
-  <script src="scripts/planetas.js"></script>
-
 </head>
-<style>
-  select {
-    width: 100%;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-family: 'Verdana', sans-serif;
-    font-weight: 800;
-    color: rgb(71, 80, 80);
-  }
-
-  img {
-    width: 80%;
-  }
-</style>
 
 <body>
 
@@ -70,6 +47,7 @@
           <a id="botonInsertar" class="button1">Añadir</a>
           <a id="botonModificar" class="button1">Modificar</a>
           <a id="botonEliminar" class="button1">Eliminar</a>
+          <a id="botonContar" class="button1">Contar</a>
         </div>
       </div>
       <div id="cuadroIzquierda">
@@ -104,45 +82,9 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="scripts/crearAlmacenes.js">
-    $(document).ready(function () {
-      crearIndicesBD();
-    });
   </script>
-  <script>
-    $(document).ready(function () {
-      $(".imagenSecundaria").on("error", function () {
-        $(this).attr('src', 'img/default.png');
-        //$(this).attr('width', '1000');
-      });
-    });
-  </script>
-  <script>
-    function iniciar() {
-
-      origen1 = document.getElementById('nombre');
-      origen1.addEventListener('dragstart', arrastrado, false);
-      destino = document.getElementById('lista');
-      destino.addEventListener('dragenter', function (e) {
-        e.preventDefault();
-      }, false);
-      destino.addEventListener('dragover', function (e) {
-        e.preventDefault();
-      }, false);
-      destino.addEventListener('drop', soltado, false);
-    }
-
-    function arrastrado(e) {
-      let error = "default";
-      var codigo = '<img src="img/' + origen1.value + '.png" class = imagenSecundaria onerror="this.onerror=null; this.src=\'img/default.png\'">';
-      e.dataTransfer.setData('Text', codigo);
-    }
-
-    function soltado(e) {
-      e.preventDefault();
-      destino.innerHTML = e.dataTransfer.getData('Text');
-    }
-    window.addEventListener('load', iniciar, false);
-  </script>
+  <script src="scripts/planetas.js"></script>
 </body>
 
 </html>
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

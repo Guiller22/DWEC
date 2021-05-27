@@ -1,6 +1,37 @@
-function codigo() {
-	var peticion, bd, transaccion, almacenPlanetas, almacenAsteroides;
+$(document).ready(function () {
+	$("select").addClass("seleccionar");
+	function iniciar() {
+		
+		origen1 = document.getElementById('nombre');
+		origen1.addEventListener('dragstart', arrastrado, false);
+		destino =  document.getElementById('lista');
+		destino.addEventListener('dragenter', function (e) {
+		  e.preventDefault();
+		}, false);
+		destino.addEventListener('dragover', function (e) {
+		  e.preventDefault();
+		}, false);
+		destino.addEventListener('drop', soltado, false);
+	  }
+  
+	  function arrastrado(e) {
+		let error = "default";
+		var codigo = '<img id="prueba" src="img/' + origen1.value + '.png" class = imagenSecundaria onerror="this.onerror=null; this.src=\'img/default.png\'">';
+		e.dataTransfer.setData('Text', codigo);
+	  }
+  
+	  function soltado(e) {
+		e.preventDefault();
+		destino.innerHTML = e.dataTransfer.getData('Text');
+	  }
+	  window.addEventListener('load', iniciar, false);
+	  $(".imagenSecundaria").on("error", function () {
+        $(this).attr('src', 'img/default.png');
+        //$(this).attr('width', '1000');
+      });
 
+	var peticion, bd, transaccion, almacenPlanetas, almacenAsteroides;
+	
 	
 	function refrescarListas() {
 		if (window.indexedDB) {
@@ -49,10 +80,39 @@ function codigo() {
 
 		document.getElementById("botonCargar").disabled = true;
 	}
+	//Rellenar lista
+	$("#botonCargar").click(function(){
+		refrescarListas();
+	})
+	//Contar
+	$("#botonContar").click(function () {
 
+		if (window.indexedDB) {
+			peticion = window.indexedDB.open("Planetas");
+
+
+			peticion.onsuccess = function (evento) {
+				console.log("Success");
+
+				bd = evento.target.result;
+				
+				transaccion = bd.transaction(bd.objectStoreNames, "readwrite");
+				almacen = transaccion.objectStore("Asteroides");
+				
+				var contadorRegistros = almacen.count();
+
+				//var rango = IDBKeyRange.bound(7,34);
+				//var contadorRegistros = store.count(rango);
+
+				contadorRegistros.onsuccess = function () {
+					alert("Hay " + contadorRegistros.result + " asteroides");
+				}
+
+			}
+		}
+	})
 
 	function insertarElementoControlLista(_asteroide) {
-		//var htmlTexto = libro.isbn + "  <----->  " + libro.titulo;
 		var htmlTexto = _asteroide.nombre;
 		var listaItem = document.createElement("option");
 		listaItem.setAttribute("value",_asteroide.id);
@@ -60,14 +120,18 @@ function codigo() {
 
 		var lista = document.getElementById("listaAsteroides");
 		lista.appendChild(listaItem);
+		$("select").children('*').addClass("prueba");
 
 		listaItem.onclick = function () {
 			var id = lista.options[lista.selectedIndex].value;
 			var transaccionEvento = bd.transaction(bd.objectStoreNames, "readwrite");
 			var almacenEvento = transaccionEvento.objectStore("Asteroides");
 			var registroEvento = almacenEvento.get((id));
+			
+			
 
 			registroEvento.onsuccess = function(evento) {
+
 				document.getElementById("id").value = registroEvento.result.id;
 				document.getElementById("nombre").value = registroEvento.result.nombre;
 				document.getElementById("dimensiones").value = registroEvento.result.dimensiones;
@@ -76,53 +140,48 @@ function codigo() {
 		}
 	}
 
-
 	//Insertar
-	document.getElementById("botonInsertar").onclick = function () {
+	$("#botonInsertar").click(function () {
 		var transaccionInsertar = bd.transaction(bd.objectStoreNames,"readwrite");
 		var almacenInsertar = transaccionInsertar.objectStore("Asteroides");
 		var nuevoAsteroide= {};
 
-		nuevoAsteroide.id = document.getElementById("id").value;
-		nuevoAsteroide.nombre = document.getElementById("nombre").value;
-		nuevoAsteroide.dimensiones = document.getElementById("dimensiones").value;
-		nuevoAsteroide.anyo_desc = document.getElementById("anyo").value;
-		
+		nuevoAsteroide.id = $('#id').val();
+		nuevoAsteroide.nombre = $('#nombre').val();
+		nuevoAsteroide.dimensiones = $('#dimensiones').val();
+		nuevoAsteroide.anyo_desc = $('#anyo').val();
 
 		almacenInsertar.add(nuevoAsteroide);
 		refrescarListas();
-	}
+	})
 	//Modificar
-
-	document.getElementById("botonModificar").onclick = function () {
+	$("#botonModificar").click(function () {
 		var transaccionModificar = bd.transaction(bd.objectStoreNames,"readwrite");
 		var almacenModificar = transaccionModificar.objectStore("Asteroides");
 		var nuevoAsteroide = {};
 
-		nuevoAsteroide.id = document.getElementById("id").value;
-		nuevoAsteroide.nombre = document.getElementById("nombre").value;
-		nuevoAsteroide.dimensiones = document.getElementById("dimensiones").value;
-		nuevoAsteroide.anyo_desc = document.getElementById("anyo").value;
+		nuevoAsteroide.id = $('#id').val();
+		nuevoAsteroide.nombre = $('#nombre').val();
+		nuevoAsteroide.dimensiones = $('#dimensiones').val();
+		nuevoAsteroide.anyo_desc = $('#anyo').val();
+
 		almacenModificar.put(nuevoAsteroide);
 		refrescarListas();
-	}
+	})
 
 	//Eliminar
-	document.getElementById("botonEliminar").onclick = function () {
+	$("#botonEliminar").click(function () {
 		var transaccionEliminar = bd.transaction(bd.objectStoreNames,"readwrite");
 		var almacenEliminar = transaccionEliminar.objectStore("Asteroides");
 
-		peticionEliminacion = almacenEliminar.delete(document.getElementById("id").value);
+		peticionEliminacion = almacenEliminar.delete($('#nombre').val());
+		var valor = $('#id').val();
+		var valor2 = $('#nombre').val();
 		peticionEliminacion.onsuccess = function () {
-			alert("Asteroide eliminado")
+			alert("El Asteroide con id "+valor+" y nombre "+valor2+" ha sido eliminado")
 		}
 		refrescarListas();
-	}
-
-	document.getElementById("botonCargar").onclick = refrescarListas;
-}
-
-window.onload = codigo;
-$(function (){
-	$("*").css("fontFamily","arial");				
+	})
+	
+	
 });

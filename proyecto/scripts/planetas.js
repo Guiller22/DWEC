@@ -1,7 +1,37 @@
-function codigo() {
-	var peticion, bd, transaccion, almacen;
+$(document).ready(function () {
+	//drag and drop
+	$("select").addClass("seleccionar");
+	function iniciar() {
 
+		origen1 = document.getElementById('nombre');
+		origen1.addEventListener('dragstart', arrastrado, false);
+		destino = document.getElementById('lista');
+		destino.addEventListener('dragenter', function (e) {
+		  e.preventDefault();
+		}, false);
+		destino.addEventListener('dragover', function (e) {
+		  e.preventDefault();
+		}, false);
+		destino.addEventListener('drop', soltado, false);
+	  }
+  
+	  function arrastrado(e) {
+		let error = "default";
+		var codigo = '<img id="prueba" src="img/' + origen1.value + '.png" class = imagenSecundaria onerror="this.onerror=null; this.src=\'img/default.png\'">';
+		e.dataTransfer.setData('Text', codigo);
+	  }
+  
+	  function soltado(e) {
+		e.preventDefault();
+		destino.innerHTML = e.dataTransfer.getData('Text');
+	  }
+	  $(".imagenSecundaria").on("error", function () {
+        $(this).attr('src', 'img/default.png');
+        //$(this).attr('width', '1000');
+      });
+	$(iniciar).on( "load" );
 	
+	var peticion, bd, transaccion, almacen;
 	function refrescarLista() {
 		if (window.indexedDB) {
 			peticion = window.indexedDB.open("Planetas");
@@ -49,23 +79,53 @@ function codigo() {
 
 		document.getElementById("botonCargar").disabled = true;
 	}
+	$("#botonCargar").click(function(){
+		refrescarLista();
+	})
+	//Contar
+	$("#botonContar").click(function () {
+
+		if (window.indexedDB) {
+			peticion = window.indexedDB.open("Planetas");
 
 
+			peticion.onsuccess = function (evento) {
+				console.log("Success");
+
+				bd = evento.target.result;
+				
+				transaccion = bd.transaction(bd.objectStoreNames, "readwrite");
+				almacen = transaccion.objectStore("Planetas");
+				
+				var contadorRegistros = almacen.count();
+
+				//var rango = IDBKeyRange.bound(7,34);
+				//var contadorRegistros = store.count(rango);
+
+				contadorRegistros.onsuccess = function () {
+					alert("Hay " + contadorRegistros.result + " planetas");
+				}
+
+			}
+		}
+	})
 	function insertarElementoControlLista(_planeta) {
-		//var htmlTexto = libro.isbn + "  <----->  " + libro.titulo;
 		var htmlTexto = _planeta.nombre;
 		var listaItem = document.createElement("option");
 		listaItem.setAttribute("value",_planeta.id);
 		listaItem.textContent = htmlTexto;
+		
 
 		var lista = document.getElementById("listaPlanetas");
 		lista.appendChild(listaItem);
+		$("select").children('*').addClass("prueba");
 
 		listaItem.onclick = function () {
 			var id = lista.options[lista.selectedIndex].value;
 			var transaccionEvento = bd.transaction(bd.objectStoreNames, "readwrite");
 			var almacenEvento = transaccionEvento.objectStore("Planetas");
 			var registroEvento = almacenEvento.get(id);
+			
 
 			registroEvento.onsuccess = function(evento) {
 				document.getElementById("id").value = registroEvento.result.id;
@@ -77,51 +137,46 @@ function codigo() {
 	
 	}
 
-	
-	document.getElementById("botonInsertar").onclick = function () {
+	//Insertar
+	$("#botonInsertar").click(function () {
 		var transaccionInsertar = bd.transaction(bd.objectStoreNames,"readwrite");
 		var almacenInsertar = transaccionInsertar.objectStore("Planetas");
 		var nuevoPlaneta = {};
-
-		nuevoPlaneta.id = document.getElementById("id").value;
-		nuevoPlaneta.anyo = document.getElementById("anyo").value;
-		nuevoPlaneta.nombre = document.getElementById("nombre").value;
-		nuevoPlaneta.desc = document.getElementById("desc").value;
+		nuevoPlaneta.id = $('#id').val();
+		nuevoPlaneta.anyo = $('#anyo').val();
+		nuevoPlaneta.nombre = $('#nombre').val();
+		nuevoPlaneta.desc = $('#desc').val();
 		
 
 		almacenInsertar.add(nuevoPlaneta);
 		refrescarLista();
-	}
+	})
 
-
-	document.getElementById("botonModificar").onclick = function () {
+	//Modificar
+	$("#botonModificar").click(function () {
 		var transaccionModificar = bd.transaction(bd.objectStoreNames,"readwrite");
 		var almacenModificar = transaccionModificar.objectStore("Planetas");
 		var nuevoPlaneta = {};
 
-		nuevoPlaneta.id = document.getElementById("id").value;
-		nuevoPlaneta.anyo = document.getElementById("anyo").value;
-		nuevoPlaneta.nombre = document.getElementById("nombre").value;
-		nuevoPlaneta.desc = document.getElementById("desc").value;
+		nuevoPlaneta.id = $('#id').val();
+		nuevoPlaneta.anyo = $('#anyo').val();
+		nuevoPlaneta.nombre = $('#nombre').val();
+		nuevoPlaneta.desc = $('#desc').val();
 		almacenModificar.put(nuevoPlaneta);
 		refrescarLista();
-	}
+	})
 
-	/***************************************************************
-	 * ELIMINAR ****************************************************
-	 **************************************************************/
-	document.getElementById("botonEliminar").onclick = function () {
+	//Eliminar
+	$("#botonEliminar").click(function () {
 		var transaccionEliminar = bd.transaction(bd.objectStoreNames,"readwrite");
 		var almacenEliminar = transaccionEliminar.objectStore("Planetas");
 
-		peticionEliminacion = almacenEliminar.delete(document.getElementById("id").value);
+		idElim = $('#id').val();
+		peticionEliminacion = almacenEliminar.delete($('#id').val());
 		peticionEliminacion.onsuccess = function () {
-			alert("Planeta eliminado")
+			alert("Planeta eliminado "+idElim)
 		}
 		refrescarLista();
-	}
-
-	document.getElementById("botonCargar").onclick = refrescarLista;
+	})
 }
-
-window.onload = codigo;
+)

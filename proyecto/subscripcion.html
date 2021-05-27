@@ -7,6 +7,9 @@
     <title>Document</title>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/the-big-picture.css" rel="stylesheet">
+    <script src="recursos/jquery-3.5.1.js"></script>
+    <script src="scripts/jquery-cookie-master/src/jquery.cookie.js">
+    </script>
 </head>
 
 <body>
@@ -37,9 +40,10 @@
 
     <div class="formulario">
         <form>
+
             <h1>Registro para recibir información sobre nuestra página</h1>
             <label id="nombre" for="nombre">Nombre</label>
-            <input class="formRegist" type="text" id="fname" name="nombre" placeholder="Nombre..">
+            <input type="text" id="fname" name="nombre" placeholder="Nombre..">
 
             <label for="apellido">Apellido</label>
             <input type="text" id="apellido" name="apellido" placeholder="Apellido..">
@@ -58,27 +62,12 @@
 
             Recordar
             <input type="checkbox" id="recordar" name="recordar">
-            <input type="submit" onclick="notificacion()" value="Registrar">
+            <input type="submit" id="login" value="Registrar">
 
         </form>
     </div>
-    <script>
-        function notificacion() {
-            alert("Hola\n" + document.getElementById("fname").value);
-
-            if (document.getElementById("recordar").checked) {
-                var name = document.getElementById("fname").value;
-                var d = new Date();
-                var nombre = document.getElementById("fname");
-                d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
-                var caduca = "expires=" + d.toUTCString();
-                document.cookie = "usuario=" + name + ";" + caduca;
-                alert("Hola\n" + document.cookie + "");
-            }
-        }
-    </script>
-    <script>
-
+    <script src="scripts/registro.js">
+        
     </script>
 
 </html>

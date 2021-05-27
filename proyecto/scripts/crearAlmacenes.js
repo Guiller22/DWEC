@@ -1,3 +1,4 @@
+$(document).ready(function () {
 function crearIndicesBD() {
 	var peticion, bd, almacenPlanetas, almacenAsteroides;
 
@@ -172,3 +173,4 @@ function crearIndicesBD() {
 	}
   }
   document.onload = crearIndicesBD();
+})
